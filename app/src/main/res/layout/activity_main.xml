@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
+
+<LinearLayout
+    android:id="@+id/myball"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:layout_marginTop="14dp"
+    android:layout_alignTop="@id/upframe"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/circle_shape"
+    android:elevation="7dp"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_foreground"
+        />
+
+</LinearLayout>
+
+
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:src="@drawable/upframe"
+        android:adjustViewBounds="true"
+        android:id="@+id/upframe"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <ImageView
+        android:id="@+id/centerframem"
+        android:layout_width="470dp"
+        android:layout_height="590dp"
+        android:src="@drawable/centerframem"
+        android:layout_below="@id/upframe"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        />
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/centerframem"
+         android:layout_below="@id/upframe"
+        android:src="@drawable/titleframe"
+        android:layout_marginTop="15dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+       android:layout_alignTop="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/title"
+        android:layout_alignBottom="@id/title"
+        android:gravity="center"
+        android:textSize="26dp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Controller votre apareil\n a distance just avec\n les gestes de la main\n sans toucher l'écran \n en utilisant la camera\n frontale et le capteur \n de proximité .\n appuyez sur le button\n next pour voir les étapes \n d'utilisation."
+        android:layout_alignTop="@id/centerframem"
+        android:layout_alignLeft="@id/centerframem"
+        android:layout_alignRight="@id/centerframem"
+        android:layout_alignBottom="@id/centerframem"
+        android:gravity="center"
+        android:textSize="26dp"
+        android:textColor="@color/mydarkblue"
+        />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/b1"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+
+    <!-- <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/LRbox"
+    >
+
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="5"
+             >
+             <ImageView
+                 android:id="@+id/RollBox"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/boxez"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Roll"
+                 android:fontFamily="sans-serif-black"
+                 android:textColor="@color/white"
+                 android:textSize="30dp"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="50dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:maxLines="5"
+                 android:text="Controller votre apareil a distance\n just avec les gestes de ta main\n sans toucher l'écran."
+                 android:textColor="@color/white"
+                 android:textSize="20dp"
+                 android:gravity="center_horizontal"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="100dp"/>
+
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boxez"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utilisation"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="53dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="mettez votre main au dessus \nde la caméra frontale et déplacez votre\n main a gauche ou a droite jusqu'à ce\n que la bale atteigne l'icône (L ou R) "
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="84dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.7"
+            >
+            <Button
+                android:id="@+id/FirstNext"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/buttons"
+                android:text="Next"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:onClick="proceed"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/balls1"
+                 android:layout_marginBottom="13dp"
+
+                 />
+        </RelativeLayout>
+        </LinearLayout>   -->
+</RelativeLayout>

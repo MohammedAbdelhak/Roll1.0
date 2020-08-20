@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
+
+
+    <ImageView
+        android:id="@+id/centerframem"
+        android:layout_width="match_parent"
+        android:layout_height="758dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/centerframetall" />
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/centerframem"
+        android:src="@drawable/titleframe"
+        android:layout_marginTop="55dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed2"
+        />
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed2"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Les étapes d'utilisation"
+        android:layout_alignTop="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/title"
+        android:layout_alignBottom="@id/title"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:textColor="@color/white"
+        />
+
+
+
+
+    <ImageView
+    android:id="@+id/first"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_alignRight="@id/centerframem"
+    android:src="@drawable/tutoone"
+    android:layout_marginRight="28dp"
+    android:layout_below="@id/title"
+    />
+    <ImageView
+        android:id="@+id/second"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/centerframem"
+        android:src="@drawable/tutotwo"
+        android:layout_marginLeft="28dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="90dp"
+        />
+    <ImageView
+        android:id="@+id/third"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@id/centerframem"
+        android:src="@drawable/tutothree"
+        android:layout_marginRight="28dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="209dp"
+
+        />
+    <ImageView
+        android:id="@+id/fourth"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/centerframem"
+        android:src="@drawable/tutofour"
+        android:layout_marginLeft="28dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="300dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mettez votre main\nau dessus la caméra \nfrontale."
+        android:layout_alignTop="@id/first"
+        android:layout_alignRight="@id/first"
+        android:layout_alignBottom="@id/first"
+        android:layout_marginRight="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apres la balle \ns'apparaisse, levez \nla main  ."
+        android:layout_alignTop="@id/second"
+        android:layout_alignLeft="@id/second"
+        android:layout_alignBottom="@id/second"
+        android:layout_marginLeft="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remettez votre main\nau dessus la caméra \nfrontale."
+        android:layout_alignTop="@id/third"
+        android:layout_alignRight="@id/third"
+        android:layout_alignBottom="@id/third"
+        android:layout_marginRight="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glissez la main ! \na gauche ou a droite \npour choisir L ou R "
+        android:layout_alignTop="@id/fourth"
+        android:layout_alignLeft="@id/fourth"
+        android:layout_alignBottom="@id/fourth"
+        android:layout_marginLeft="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/b2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+    <!-- <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/LRbox"
+    >
+
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="5"
+             >
+             <ImageView
+                 android:id="@+id/RollBox"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/boxez"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Roll"
+                 android:fontFamily="sans-serif-black"
+                 android:textColor="@color/white"
+                 android:textSize="30dp"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="50dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:maxLines="5"
+                 android:text="Controller votre apareil a distance\n just avec les gestes de ta main\n sans toucher l'écran."
+                 android:textColor="@color/white"
+                 android:textSize="20dp"
+                 android:gravity="center_horizontal"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="100dp"/>
+
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boxez"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utilisation"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="53dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="mettez votre main au dessus \nde la caméra frontale et déplacez votre\n main a gauche ou a droite jusqu'à ce\n que la bale atteigne l'icône (L ou R) "
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="84dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.7"
+            >
+            <Button
+                android:id="@+id/FirstNext"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/buttons"
+                android:text="Next"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:onClick="proceed"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/balls1"
+                 android:layout_marginBottom="13dp"
+
+                 />
+        </RelativeLayout>
+        </LinearLayout>   -->
+</RelativeLayout>

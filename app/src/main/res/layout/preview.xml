@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".preview"
+        android:background="@drawable/background">
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:src="@drawable/upframe"
+        android:adjustViewBounds="true"
+        android:id="@+id/upframe"
+        android:layout_centerHorizontal="true"
+        />
+
+        <ImageView
+            android:id="@+id/centerframem"
+            android:layout_width="match_parent"
+            android:layout_height="758dp"
+            android:layout_marginTop="33dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/centerframetall" />
+
+        <ImageView
+            android:id="@+id/title"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@id/centerframem"
+            android:src="@drawable/titleframe"
+            android:layout_marginTop="55dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/next"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/next"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="44dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="proceed2"
+            />
+        <ImageView
+            android:id="@+id/previous"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/previous"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="44dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="proceed2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Premier essai"
+            android:layout_alignTop="@id/title"
+            android:layout_alignLeft="@id/title"
+            android:layout_alignRight="@id/title"
+            android:layout_alignBottom="@id/title"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:textColor="@color/white"
+            />
+
+        <org.opencv.android.JavaCameraView
+            android:id="@+id/mycamera"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_alignLeft="@id/centerframem"
+            android:layout_alignRight="@id/centerframem"
+            android:layout_alignTop="@id/title"
+            android:layout_margin="120dp"
+            />
+        <ImageView
+            android:id="@+id/stepcontainer"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/prevstepscontainer"
+            android:layout_alignTop="@id/mycamera"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="69dp"
+            />
+    <LinearLayout
+        android:id="@+id/myviewgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignTop="@id/stepcontainer"
+        android:layout_alignLeft="@id/stepcontainer"
+        android:layout_alignRight="@id/stepcontainer"
+        android:layout_alignBottom="@id/stepcontainer"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+
+
+        <ImageView
+            android:id="@+id/step1"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/prevstep1"
+            android:layout_alignTop="@id/stepcontainer"
+            />
+        <ImageView
+            android:id="@+id/step2"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/prevstep2"
+            android:layout_alignTop="@id/stepcontainer"
+
+            />
+
+        <ImageView
+            android:id="@+id/step3"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/stepcontainer"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/prevstep3"
+
+            />
+
+        <ImageView
+            android:id="@+id/step4"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/prevstep4"
+            android:layout_alignTop="@id/stepcontainer"
+
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Placez votre main \nau dessus de la camera"
+        android:layout_alignTop="@id/myviewgroup"
+        android:layout_alignLeft="@id/myviewgroup"
+        android:layout_alignRight="@id/myviewgroup"
+        android:layout_alignBottom="@id/myviewgroup"
+        android:gravity="center"
+        android:layout_marginBottom="152dp"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Levez votre main"
+        android:layout_alignTop="@id/myviewgroup"
+        android:layout_alignLeft="@id/myviewgroup"
+        android:layout_alignRight="@id/myviewgroup"
+        android:layout_alignBottom="@id/myviewgroup"
+        android:gravity="center"
+        android:layout_marginBottom="52dp"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Replacez votre main \nau dessus de la camera"
+        android:layout_alignTop="@id/myviewgroup"
+        android:layout_alignLeft="@id/myviewgroup"
+        android:layout_alignRight="@id/myviewgroup"
+        android:layout_alignBottom="@id/myviewgroup"
+        android:gravity="center"
+        android:layout_marginTop="45dp"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bougez votre main\n a gauche ou a droite"
+        android:layout_alignTop="@id/myviewgroup"
+        android:layout_alignLeft="@id/myviewgroup"
+        android:layout_alignRight="@id/myviewgroup"
+        android:layout_alignBottom="@id/myviewgroup"
+        android:gravity="center"
+        android:layout_marginTop="145dp"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/b5"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+    <!-- <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/LRbox"
+    >
+
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="5"
+             >
+             <ImageView
+                 android:id="@+id/RollBox"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/boxez"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Roll"
+                 android:fontFamily="sans-serif-black"
+                 android:textColor="@color/white"
+                 android:textSize="30dp"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="50dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:maxLines="5"
+                 android:text="Controller votre apareil a distance\n just avec les gestes de ta main\n sans toucher l'écran."
+                 android:textColor="@color/white"
+                 android:textSize="20dp"
+                 android:gravity="center_horizontal"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="100dp"/>
+
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boxez"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utilisation"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="53dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="mettez votre main au dessus \nde la caméra frontale et déplacez votre\n main a gauche ou a droite jusqu'à ce\n que la bale atteigne l'icône (L ou R) "
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="84dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.7"
+            >
+            <Button
+                android:id="@+id/FirstNext"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/buttons"
+                android:text="Next"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:onClick="proceed"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/balls1"
+                 android:layout_marginBottom="13dp"
+
+                 />
+        </RelativeLayout>
+        </LinearLayout>   -->
+    </RelativeLayout>

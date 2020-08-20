@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scenes"
+    android:background="@drawable/background">
+
+
+    <ImageView
+        android:id="@+id/centerframem"
+        android:layout_width="match_parent"
+        android:layout_height="758dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/centerframetall" />
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/centerframem"
+        android:src="@drawable/titleframe"
+        android:layout_marginTop="55dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Les Scénarios"
+        android:layout_alignTop="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/title"
+        android:layout_alignBottom="@id/title"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:textColor="@color/white"
+        />
+    <ImageView
+        android:id="@+id/scenesframe"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:src="@drawable/scenarioz"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/title"
+        android:layout_alignTop="@id/scenesframe"
+        android:layout_alignBottom="@id/scenesframe"
+        android:gravity="center"
+        >
+
+
+    <ImageView
+        android:id="@+id/mainscene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mainscenario"
+
+        />
+        <LinearLayout
+            android:id="@+id/myball"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="27dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_shape"
+            android:elevation="7dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher_foreground"
+                />
+
+        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scénario generale"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="12dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="70dp"
+        />
+    <ImageView
+        android:id="@+id/phonescene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/phonescenario"
+
+        android:layout_marginTop="90dp"
+        />
+        <LinearLayout
+            android:id="@+id/myball2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="116dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_shape"
+            android:elevation="7dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher_foreground"
+                />
+
+        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scénario Appel Téléphonique"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:layout_marginTop="163dp"
+        />
+    <ImageView
+        android:id="@+id/musicscene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/musicscenario"
+
+        android:layout_marginTop="183dp"
+
+        />
+        <LinearLayout
+            android:id="@+id/myball3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="210dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_shape"
+            android:elevation="7dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher_foreground"
+                />
+
+        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scénario Musique "
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="12dp"
+
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="253dp"
+
+        />
+
+    <ImageView
+        android:id="@+id/alarmscene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/alaramscenario"
+
+        android:layout_marginTop="273dp"
+
+        />
+        <LinearLayout
+            android:id="@+id/myball4"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="300dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_shape"
+            android:elevation="7dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher_foreground"
+                />
+
+        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scénario l'Alarm "
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="12dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="343dp"
+
+        />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/b6"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+
+    <!-- <ImageView
+         android:id="@+id/accesconainer"
+         android:layout_width="320dp"
+         android:layout_height="200dp"
+         android:layout_centerHorizontal="true"
+         android:src="@drawable/permcontainer"
+         android:layout_below="@id/title"
+         />
+
+     <ImageView
+         android:id="@+id/permcontainer"
+         android:layout_width="320dp"
+         android:layout_height="200dp"
+         android:layout_centerHorizontal="true"
+         android:src="@drawable/permcontainer"
+         android:layout_below="@id/accesconainer"
+         android:layout_alignBottom="@id/centerframem"
+         android:layout_marginBottom="50dp"
+         />
+
+     <ImageView
+         android:id="@+id/perm1"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:layout_alignLeft="@id/permcontainer"
+         android:layout_alignTop="@id/permcontainer"
+         android:layout_alignRight="@id/permcontainer"
+
+         android:layout_marginTop="125dp"
+         android:src="@drawable/smallcontainerperm" />
+
+     <ImageView
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:layout_alignLeft="@id/permcontainer"
+         android:layout_alignRight="@id/permcontainer"
+         android:layout_marginTop="15dp"
+         android:src="@drawable/smallcontainerperm"
+         android:layout_below="@id/perm1"
+         />
+
+
+     <TextView
+         android:id="@+id/camera"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Camera"
+         android:textColor="@color/white"
+         android:textSize="20dp"
+         android:layout_alignTop="@id/perm1"
+         android:layout_alignLeft="@id/perm1"
+         android:layout_marginLeft="35dp"
+         android:layout_marginTop="11dp"
+         />
+
+     <Switch
+         android:id="@+id/switch1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_toRightOf="@id/camera"
+         android:layout_alignBottom="@id/camera"
+         android:theme="@style/SwitchTheme"
+         android:layout_alignRight="@id/permcontainer"
+         android:layout_marginRight="35dp"
+         android:onClick="permisionactivator"
+         />
+
+
+ -->
+
+    <!-- <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/LRbox"
+    >
+
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="5"
+             >
+             <ImageView
+                 android:id="@+id/RollBox"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/boxez"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Roll"
+                 android:fontFamily="sans-serif-black"
+                 android:textColor="@color/white"
+                 android:textSize="30dp"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="50dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:maxLines="5"
+                 android:text="Controller votre apareil a distance\n just avec les gestes de ta main\n sans toucher l'écran."
+                 android:textColor="@color/white"
+                 android:textSize="20dp"
+                 android:gravity="center_horizontal"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="100dp"/>
+
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boxez"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utilisation"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="53dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="mettez votre main au dessus \nde la caméra frontale et déplacez votre\n main a gauche ou a droite jusqu'à ce\n que la bale atteigne l'icône (L ou R) "
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="84dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.7"
+            >
+            <Button
+                android:id="@+id/FirstNext"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/buttons"
+                android:text="Next"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:onClick="proceed"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/balls1"
+                 android:layout_marginBottom="13dp"
+
+                 />
+        </RelativeLayout>
+        </LinearLayout>   -->
+</RelativeLayout>

@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PermisionsActivity"
+    android:background="@drawable/background">
+
+
+    <ImageView
+        android:id="@+id/centerframem"
+        android:layout_width="match_parent"
+        android:layout_height="758dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/centerframetall" />
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/centerframem"
+        android:src="@drawable/titleframe"
+        android:layout_marginTop="55dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Les permissions"
+        android:layout_alignTop="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/title"
+        android:layout_alignBottom="@id/title"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:textColor="@color/white"
+        />
+
+    <ImageView
+        android:id="@+id/accesconainer1"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/permcontainer"
+        android:layout_below="@id/title"
+        android:scaleType="center"
+        />
+
+        <ImageView
+            android:id="@+id/perm1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/smallcontainerperm"
+            android:layout_alignRight="@id/accesconainer1"
+            android:layout_alignLeft="@id/accesconainer1"
+            android:layout_alignTop="@id/accesconainer1"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            />
+
+    <TextView
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Camera"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_alignTop="@id/perm1"
+        android:layout_alignLeft="@id/perm1"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="11dp"
+        />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/camera"
+        android:layout_alignBottom="@id/camera"
+        android:theme="@style/SwitchTheme"
+        android:layout_alignRight="@id/perm1"
+        android:layout_marginRight="35dp"
+        />
+    <TextView
+        android:id="@+id/cameraExplain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="La camera frontale est utilisé\n pour la detection de la main."
+        android:textColor="@color/one"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_below="@id/camera"
+        android:layout_alignRight="@id/perm1"
+        android:layout_alignLeft="@id/perm1"
+        android:layout_marginTop="25dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/accesconainer2"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/permcontainer"
+        android:layout_below="@id/accesconainer1"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="15dp"
+        />
+
+    <ImageView
+        android:id="@+id/perm2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/smallcontainerperm"
+        android:layout_alignRight="@id/accesconainer2"
+        android:layout_alignLeft="@id/accesconainer2"
+        android:layout_alignTop="@id/accesconainer2"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/ApearOnTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apparaître En Haut"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_alignTop="@id/perm2"
+        android:layout_alignLeft="@id/perm2"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="11dp"
+        />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ApearOnTop"
+        android:layout_alignBottom="@id/ApearOnTop"
+        android:theme="@style/SwitchTheme"
+        android:layout_alignRight="@id/perm2"
+        android:layout_marginRight="35dp"
+
+        />
+    <TextView
+        android:id="@+id/ApairOnTopExplain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pour que la bale flottante apparaisse au-dessus \n de toutes les applications."
+        android:textColor="@color/one"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_below="@id/ApearOnTop"
+        android:layout_alignRight="@id/perm2"
+        android:layout_alignLeft="@id/perm2"
+        android:layout_marginTop="25dp"
+        />
+
+
+
+    <ImageView
+        android:id="@+id/accesconainer3"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/permcontainer"
+        android:layout_below="@id/accesconainer2"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="15dp"
+        />
+
+    <ImageView
+        android:id="@+id/perm3"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/smallcontainerperm"
+        android:layout_alignRight="@id/accesconainer3"
+        android:layout_alignLeft="@id/accesconainer3"
+        android:layout_alignTop="@id/accesconainer3"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telephone"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_alignTop="@id/perm3"
+        android:layout_alignLeft="@id/perm3"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="11dp"
+        />
+
+    <Switch
+        android:id="@+id/switch3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/phone"
+        android:layout_alignBottom="@id/phone"
+        android:theme="@style/SwitchTheme"
+        android:layout_alignRight="@id/perm3"
+        android:layout_marginRight="35dp"
+        />
+    <TextView
+        android:id="@+id/phoneExplain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="le cas d'un appel téléphonique \n vous utilisez la balle pour \n répondre ou couper l'appel."
+        android:textColor="@color/one"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_below="@id/phone"
+        android:layout_alignRight="@id/perm3"
+        android:layout_alignLeft="@id/perm3"
+        android:layout_marginTop="25dp"
+        />
+
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/b3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+
+
+
+
+
+
+
+    <!-- <ImageView
+         android:id="@+id/accesconainer"
+         android:layout_width="320dp"
+         android:layout_height="200dp"
+         android:layout_centerHorizontal="true"
+         android:src="@drawable/permcontainer"
+         android:layout_below="@id/title"
+         />
+
+     <ImageView
+         android:id="@+id/permcontainer"
+         android:layout_width="320dp"
+         android:layout_height="200dp"
+         android:layout_centerHorizontal="true"
+         android:src="@drawable/permcontainer"
+         android:layout_below="@id/accesconainer"
+         android:layout_alignBottom="@id/centerframem"
+         android:layout_marginBottom="50dp"
+         />
+
+     <ImageView
+         android:id="@+id/perm1"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:layout_alignLeft="@id/permcontainer"
+         android:layout_alignTop="@id/permcontainer"
+         android:layout_alignRight="@id/permcontainer"
+
+         android:layout_marginTop="125dp"
+         android:src="@drawable/smallcontainerperm" />
+
+     <ImageView
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:layout_alignLeft="@id/permcontainer"
+         android:layout_alignRight="@id/permcontainer"
+         android:layout_marginTop="15dp"
+         android:src="@drawable/smallcontainerperm"
+         android:layout_below="@id/perm1"
+         />
+
+
+     <TextView
+         android:id="@+id/camera"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Camera"
+         android:textColor="@color/white"
+         android:textSize="20dp"
+         android:layout_alignTop="@id/perm1"
+         android:layout_alignLeft="@id/perm1"
+         android:layout_marginLeft="35dp"
+         android:layout_marginTop="11dp"
+         />
+
+     <Switch
+         android:id="@+id/switch1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_toRightOf="@id/camera"
+         android:layout_alignBottom="@id/camera"
+         android:theme="@style/SwitchTheme"
+         android:layout_alignRight="@id/permcontainer"
+         android:layout_marginRight="35dp"
+         android:onClick="permisionactivator"
+         />
+
+
+ -->
+
+    <!-- <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/LRbox"
+    >
+
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="5"
+             >
+             <ImageView
+                 android:id="@+id/RollBox"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/boxez"
+                 />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Roll"
+                 android:fontFamily="sans-serif-black"
+                 android:textColor="@color/white"
+                 android:textSize="30dp"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="50dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:maxLines="5"
+                 android:text="Controller votre apareil a distance\n just avec les gestes de ta main\n sans toucher l'écran."
+                 android:textColor="@color/white"
+                 android:textSize="20dp"
+                 android:gravity="center_horizontal"
+                 android:layout_alignTop="@id/RollBox"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="100dp"/>
+
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/boxez"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utilisation"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="53dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:text="mettez votre main au dessus \nde la caméra frontale et déplacez votre\n main a gauche ou a droite jusqu'à ce\n que la bale atteigne l'icône (L ou R) "
+                android:textColor="@color/white"
+                android:textSize="19dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="84dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.7"
+            >
+            <Button
+                android:id="@+id/FirstNext"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/buttons"
+                android:text="Next"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:onClick="proceed"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/balls1"
+                 android:layout_marginBottom="13dp"
+
+                 />
+        </RelativeLayout>
+        </LinearLayout>   -->
+</RelativeLayout>

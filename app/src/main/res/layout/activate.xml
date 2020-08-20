@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activation">
+
+
+
+
+
+    <ImageView
+        android:id="@+id/centerframem"
+        android:layout_width="470dp"
+        android:layout_height="590dp"
+        android:src="@drawable/centerframem"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/centerframem"
+        android:src="@drawable/titleframe"
+        android:layout_marginTop="15dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/exit"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/exit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/previous"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="44dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="proceed"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activation"
+        android:layout_alignTop="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/title"
+        android:layout_alignBottom="@id/title"
+        android:gravity="center"
+        android:textSize="26dp"
+        android:textColor="@color/white"
+        />
+    <ImageView
+        android:id="@+id/first"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@id/centerframem"
+        android:src="@drawable/tutoone"
+        android:layout_marginRight="28dp"
+        android:layout_below="@id/title"
+        />
+    <ImageView
+        android:id="@+id/second"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/centerframem"
+        android:src="@drawable/tutotwo"
+        android:layout_marginLeft="28dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="90dp"
+        />
+    <ImageView
+        android:id="@+id/third"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignRight="@id/centerframem"
+        android:src="@drawable/tutothree"
+        android:layout_marginRight="28dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="209dp"
+
+        />
+    <ImageView
+        android:id="@+id/fourth"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/centerframem"
+        android:src="@drawable/tutofour"
+        android:layout_marginLeft="28dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="300dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mettez votre main\nau dessus la caméra \nfrontale."
+        android:layout_alignTop="@id/first"
+        android:layout_alignRight="@id/first"
+        android:layout_alignBottom="@id/first"
+        android:layout_marginRight="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apres la balle \ns'apparaisse, levez \nla main  ."
+        android:layout_alignTop="@id/second"
+        android:layout_alignLeft="@id/second"
+        android:layout_alignBottom="@id/second"
+        android:layout_marginLeft="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remettez votre main\nau dessus la caméra \nfrontale."
+        android:layout_alignTop="@id/third"
+        android:layout_alignRight="@id/third"
+        android:layout_alignBottom="@id/third"
+        android:layout_marginRight="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glissez la main ! \na gauche ou a droite \npour choisir L ou R "
+        android:layout_alignTop="@id/fourth"
+        android:layout_alignLeft="@id/fourth"
+        android:layout_alignBottom="@id/fourth"
+        android:layout_marginLeft="13dp"
+        android:gravity="center_vertical"
+
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+
+    <ImageView
+        android:background="@drawable/button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/ActivateButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        />
+    <ImageView
+        android:background="@drawable/button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/DActivateButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activer"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:layout_alignTop="@id/ActivateButton"
+        android:layout_alignRight="@id/ActivateButton"
+        android:layout_alignLeft="@id/ActivateButton"
+        android:layout_alignBottom="@id/ActivateButton"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/DActivateButton"
+        android:layout_alignTop="@id/DActivateButton"
+        android:layout_alignRight="@id/DActivateButton"
+        android:layout_alignBottom="@id/DActivateButton"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="-1dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:text="Désactiver"
+        android:textColor="@color/white"
+        android:textSize="25dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deactivate"
+        android:layout_below="@id/ActivateButton"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/b7"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        />
+
+
+
+</RelativeLayout>
