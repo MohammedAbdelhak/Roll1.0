@@ -1,8 +1,6 @@
 package com.example.roll;
 
 
-import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,19 +11,15 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-//import org.opencv.android.JavaCameraView;
-
 import org.opencv.android.JavaCameraView;
-import org.opencv.android.OpenCVLoader;
 
 import static android.content.Context.SENSOR_SERVICE;
+
+//import org.opencv.android.JavaCameraView;
 
 public class ProximityElf implements SensorEventListener {
     public static final String TAG = "com.example.roll";
@@ -50,6 +44,7 @@ public class ProximityElf implements SensorEventListener {
     private Handler handler = new Handler();
     long CurrentTime , StartedTime;
     Ball myball;
+    int IsHapenning;
     Sensor ProximityMagic;
     myEye myservice;
     int Case ,Steps = 0 ;
@@ -107,6 +102,7 @@ public class ProximityElf implements SensorEventListener {
     }
 
     ProximityElf(Context ctx , float width ){
+        IsHapenning =0;
         mywidth = width;
         Case = 2 ;
         this.cx = ctx;
@@ -123,7 +119,8 @@ public class ProximityElf implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-            if ( Case == 2) {
+        if(IsHapenning == 0) {
+            if (Case == 2) {
                 if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
                     if (event.values[0] >= -4 && event.values[0] <= 4 && ElfState == 0) {
                         if (didit == 1) {
@@ -195,10 +192,18 @@ public class ProximityElf implements SensorEventListener {
                             if (connected == 1) {   // direction =  myservice.Diffrence;
                                 /*cx.stopService(i2); */
                                 connected = 0;
-                                myball.moveTheball(myservice.Diffrence);
+                                IsHapenning = 1 ;
+                                if(myservice.Diffrence != 0){
+                                myball.moveTheball(myservice.Diffrence);}
+                                if(myservice.Diffrence == 0 ){
+                                    IsHapenning = 0;
+                                    myball.distroyball();
+                                }
                                 cx.unbindService(myconnection2);
                                 savor = 1;
+
                                 handler.post(runnable3);
+
                             }
                         }
                         ElfState = 0;
@@ -210,51 +215,46 @@ public class ProximityElf implements SensorEventListener {
                     }
                 }
 
-            }
+            } else {
 
-              else {
+                if (Case == 1) {
+                    if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+                        if (event.values[0] >= -4 && event.values[0] <= 4) {
+                            if (Steps == 0) {
+                                myball = new Ball(cx, 2);
+                            }
+                            //near
+                            Steps = Steps + 1;
+                            Toast.makeText(cx, "On", Toast.LENGTH_SHORT).show();
+                            if (Steps == 1) {
+                                mystep.setImageResource(R.drawable.validated1);
+                            }
+                            if (Steps == 2) {
+                                mystep3.setImageResource(R.drawable.validated3);
+                            }
+                            myjvc.enableView();
 
-        if(Case == 1){
-            if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-                if (event.values[0] >= -4 && event.values[0] <= 4  ) {
-                        if(Steps == 0){
-                            myball = new Ball(cx , 2);
+                        } else {
+                            //far
+                            Toast.makeText(cx, "Off", Toast.LENGTH_SHORT).show();
+                            if (Steps == 1) {
+                                mystep2.setImageResource(R.drawable.validated2);
+                            }
+                            if (Steps == 2) {
+                                mystep4.setImageResource(R.drawable.validated4);
+                                Steps = 0;
+                                myjvc.disableView();
+                                myball = null;
+                            }
+
+
                         }
-                    //near
-                    Steps = Steps + 1;
-                    Toast.makeText(cx, "On", Toast.LENGTH_SHORT).show();
-                    if(Steps == 1){
-                    mystep.setImageResource(R.drawable.validated1);}
-                    if(Steps == 2){
-                        mystep3.setImageResource(R.drawable.validated3);
                     }
-                    myjvc.enableView();
-
-                } else {
-                    //far
-                    Toast.makeText(cx, "Off", Toast.LENGTH_SHORT).show();
-                    if(Steps == 1){
-                        mystep2.setImageResource(R.drawable.validated2);}
-                    if(Steps == 2){
-                        mystep4.setImageResource(R.drawable.validated4);
-                        Steps = 0 ;
-                        myjvc.disableView();
-                        myball = null;
-                    }
-
-
-
-
-
-
-
                 }
-            }
-        }
 
 
             }
-    }
+        }}
 
 
 
@@ -277,11 +277,13 @@ public class ProximityElf implements SensorEventListener {
     final Runnable runnable3 = new Runnable() {
         @Override
         public void run() {
-            if(myball != null){
+            if(myball != null && myservice.Diffrence != 0){
 
             if(myball.myservice.isremoved == 1){
                 Log.d(TAG ," isremoved ===== "+ myball.myservice.isremoved);
                 myball.doSomething(myball.mydif);
+                IsHapenning= 0 ;
+
             }
             else{
                 Log.d(TAG ," isremoved ===== "+ myball.myservice.isremoved);
@@ -289,7 +291,9 @@ public class ProximityElf implements SensorEventListener {
             }
 
             }
-            if(myball == null){
+
+
+            if(myball == null && myservice.Diffrence != 0){
                 handler.removeCallbacks(runnable3);
             }
 
@@ -384,14 +388,23 @@ public class ProximityElf implements SensorEventListener {
 
 
 
-    public ProximityElf distroyElf(){
+    public void distroyElf(){
         if( myball != null){  if(myball.exists == 1 ) {myball.distroyball();  handler.removeCallbacks(runnable); handler.removeCallbacks(runnable2);}}
        if(Case == 1){ senseManager2.unregisterListener(this);}
 
         if(Case == 2){
             senseManager.unregisterListener(this);
         cx.stopService(i);}
-        return null;
+    }
+
+
+    public void distroyEverything(){
+        if(myball == null || myball.exists == 1){
+            myball.distroyball();
+        }
+        senseManager.unregisterListener(this);
+        senseManager2.unregisterListener(this);
+        handler.removeCallbacks(runnable); handler.removeCallbacks(runnable2); handler.removeCallbacks(runnable3);
     }
 
 

@@ -21,7 +21,7 @@ public class scenes extends AppCompatActivity {
     int direction;
     private AnimatorSet animatorSet;
     private static String TAG = "com.example.opencvtest";
-    LinearLayout myln1 , myln2 , myln3 , myln4;
+    LinearLayout myln1 , myln2 , myln3 ;
 
 
     private Runnable runnable = new Runnable() {
@@ -45,18 +45,15 @@ public class scenes extends AppCompatActivity {
 
                 lftToRgt2 = ObjectAnimator.ofFloat( myln2,"translationX",0f,halw2 )
                         .setDuration(700);
-                lftToRgt4 = ObjectAnimator.ofFloat( myln4,"translationX",0f,halw2 )
-                        .setDuration(700);
+
                 rgtToLft2 = ObjectAnimator.ofFloat( myln2,"translationX",halw2,0f )
-                        .setDuration(700);
-                rgtToLft4 = ObjectAnimator.ofFloat( myln4,"translationX",halw2,0f )
                         .setDuration(700);
 
 
                 animatorSet.play( lftToRgt1 ).before( rgtToLft1 ); // manage sequence
                 animatorSet.play( lftToRgt3 ).before( rgtToLft3 ); // manage sequence
                 animatorSet.play( lftToRgt2 ).before( rgtToLft2 );
-                animatorSet.play( lftToRgt4 ).before( rgtToLft4 ); // manage sequence
+
 
                 animatorSet.start();
                 handler.postDelayed(runnable, 1500);
@@ -94,18 +91,16 @@ public class scenes extends AppCompatActivity {
 
                     lftToRgt2 = ObjectAnimator.ofFloat( myln2,"translationX",0f,halw2 )
                             .setDuration(700);
-                    lftToRgt4 = ObjectAnimator.ofFloat( myln4,"translationX",0f,halw2 )
-                            .setDuration(700);
+
                     rgtToLft2 = ObjectAnimator.ofFloat( myln2,"translationX",halw2,0f )
                             .setDuration(700);
-                    rgtToLft4 = ObjectAnimator.ofFloat( myln4,"translationX",halw2,0f )
-                            .setDuration(700);
+
 
 
                     animatorSet.play( lftToRgt1 ).before( rgtToLft1 ); // manage sequence
                     animatorSet.play( lftToRgt3 ).before( rgtToLft3 ); // manage sequence
                     animatorSet.play( lftToRgt2 ).before( rgtToLft2 );
-                    animatorSet.play( lftToRgt4 ).before( rgtToLft4 ); // manage sequence
+
 
 
                    /* lftToRgt1 = ObjectAnimator.ofFloat( myln1,"translationX",0f,halfW )
@@ -158,7 +153,6 @@ public class scenes extends AppCompatActivity {
         myln1 = findViewById(R.id.myball);
         myln2 = findViewById(R.id.myball2);
         myln3 = findViewById(R.id.myball3);
-        myln4 = findViewById(R.id.myball4);
 
 
 

@@ -103,8 +103,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
    else {
-       Toast toast = Toast.makeText(this , "Vous etes dans la premiere page" , Toast.LENGTH_LONG);
-            toast.show();}
+       Toast toast = Toast.makeText(this , "Roll : ByeBye ! " , Toast.LENGTH_LONG);
+            toast.show();
+            finish();
+   }
 
         }
 

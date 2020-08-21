@@ -115,10 +115,10 @@
         android:layout_marginTop="70dp"
         />
     <ImageView
-        android:id="@+id/phonescene"
+        android:id="@+id/musicpausescene"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/phonescenario"
+        android:src="@drawable/musicscenariopause"
 
         android:layout_marginTop="90dp"
         />
@@ -141,7 +141,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scénario Appel Téléphonique"
+        android:text="Scénario Musique 'pause'"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:textSize="18dp"
@@ -175,7 +175,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scénario Musique "
+        android:text="Scénario Musique 'play' "
         android:layout_centerHorizontal="true"
         android:paddingLeft="12dp"
 
@@ -185,42 +185,9 @@
 
         />
 
-    <ImageView
-        android:id="@+id/alarmscene"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/alaramscenario"
 
-        android:layout_marginTop="273dp"
 
-        />
-        <LinearLayout
-            android:id="@+id/myball4"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="300dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/circle_shape"
-            android:elevation="7dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_foreground"
-                />
 
-        </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scénario l'Alarm "
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="12dp"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:layout_marginTop="343dp"
-
-        />
 
 
     </RelativeLayout>
