@@ -44,6 +44,7 @@ public class ProximityElf implements SensorEventListener {
     JavaCameraView myjvc;
     Intent i , i2;
     float mywidth;
+    long T1 , T2 ;
     ActivityCatcher ActivityMessenger;
     public String CurrentUserActivity ;
     private Handler handler = new Handler();
@@ -124,6 +125,7 @@ public class ProximityElf implements SensorEventListener {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(IsHapenning == 0) {
@@ -131,6 +133,7 @@ public class ProximityElf implements SensorEventListener {
                 if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
                     if (event.values[0] >= -4 && event.values[0] <= 4 && ElfState == 0) {
                         if (didit == 1) {
+                            T1 = System.currentTimeMillis();
                             savor = 0;
                             didit = didit + 1;
                             if (ElfState == 0 && myball == null) {
@@ -146,7 +149,36 @@ public class ProximityElf implements SensorEventListener {
 
                         } else {
                             if (didit == 2) {
-                                connected = 1;
+                                T2 =  System.currentTimeMillis();
+                                if(T2 - T1 < 1500 && myKM.inKeyguardRestrictedInputMode()){
+                                    CameraManager cameraManager = (CameraManager) cx.getSystemService(Context.CAMERA_SERVICE);
+                                    try{
+                                        String cameraId = cameraManager.getCameraIdList()[0];
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {
+                                            if(FlashState == 0){
+                                                cameraManager.setTorchMode(cameraId, true);
+                                                Toast.makeText(cx , "Roll : Flash On" , Toast.LENGTH_LONG).show();
+                                                FlashState = 1 ; }
+                                            else{
+                                                if(FlashState == 1){
+                                                cameraManager.setTorchMode(cameraId, false);
+                                                Toast.makeText(cx , "Roll : Flash Off" , Toast.LENGTH_LONG).show();
+                                                FlashState = 0 ;
+                                            }}
+
+                                        }
+
+
+
+
+                                    }
+                                    catch (Exception e){
+
+                                    }
+
+                                }
+
+                            else {    connected = 1;
 
                                 //set the background and activate the EYE
                                 // 01 set the background according to package switch (package name).
@@ -184,8 +216,8 @@ public class ProximityElf implements SensorEventListener {
                                 }
 
 
-                                didit = 1;
-                            }
+
+                            } didit = 1;
                         }
                         //////////////////////////////////////////////
                         //timer for 2 seconds
@@ -193,7 +225,7 @@ public class ProximityElf implements SensorEventListener {
                         ElfState = 1;
 
 
-                    } else {
+                    }} else {
                         //far
                         if (ElfState == 1) {
                             //             Toast.makeText(cx, "Off", Toast.LENGTH_SHORT).show();
@@ -322,7 +354,7 @@ public class ProximityElf implements SensorEventListener {
                 if(StartedTime == CurrentTime && didit != 1 && connected == 0){
                     if(myball.myservice.isremoved != 1 && myball.exists == 1){
                     myball.distroyball();}
-                    if( myKM.inKeyguardRestrictedInputMode() ) {
+                   /* if( myKM.inKeyguardRestrictedInputMode() ) {
                         CameraManager cameraManager = (CameraManager) cx.getSystemService(Context.CAMERA_SERVICE);
                         try{
                         String cameraId = cameraManager.getCameraIdList()[0];
@@ -348,7 +380,7 @@ public class ProximityElf implements SensorEventListener {
 
                     } else {
                         Toast.makeText(cx , "unlocked" , Toast.LENGTH_LONG).show();
-                    }
+                    }*/
 
                     myball = null ;
                     didit = 1 ;
@@ -428,11 +460,23 @@ public class ProximityElf implements SensorEventListener {
 
     public void distroyElf(){
         if( myball != null){  if(myball.exists == 1 ) {myball.distroyball();  handler.removeCallbacks(runnable); handler.removeCallbacks(runnable2);}}
-       if(Case == 1){ senseManager2.unregisterListener(this);}
+       if(Case == 1){ senseManager2.unregisterListener(this);
+           try {
+               finalize();
+           } catch (Throwable throwable) {
+               throwable.printStackTrace();
+           }
+       }
 
         if(Case == 2){
             senseManager.unregisterListener(this);
-        cx.stopService(i);}
+        cx.stopService(i);
+            try {
+                finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
     }
 
 

@@ -1,33 +1,14 @@
 package com.example.roll;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.internal.telephony.ITelephony;
-
-import java.lang.reflect.Method;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Activation extends AppCompatActivity {
     ImageView activatebutton ;
@@ -66,7 +47,7 @@ public class Activation extends AppCompatActivity {
                     i = new Intent(getApplicationContext() , UnstoppableService.class);
                     i.putExtra("width", halfW);
                     startService(i);
-
+                    finish();
                     //start service
 
                 }
