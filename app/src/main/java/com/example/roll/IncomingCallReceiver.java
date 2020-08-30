@@ -33,13 +33,13 @@ public class IncomingCallReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if(intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_OFFHOOK)){
-            showToast(context,"Call started...");
+           // showToast(context,"Call started...");
         }
         else if(intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_IDLE)){
-            showToast(context,"Call ended...");
+           // showToast(context,"Call ended...");
         }
         else if(intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_RINGING)){
-            showToast(context,"Incoming call...");
+           //showToast(context,"Incoming call...");
           /*  Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
             i.putExtra(Intent.EXTRA_KEY_EVENT,new KeyEvent(KeyEvent.ACTION_UP,KeyEvent.KEYCODE_HEADSETHOOK));
             context.sendOrderedBroadcast(i, null);

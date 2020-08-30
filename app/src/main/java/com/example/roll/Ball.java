@@ -5,28 +5,17 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.media.AudioManager;
-import android.media.Image;
-import android.media.MediaPlayer;
-import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Display;
 import android.widget.ImageView;
 
 import com.example.roll.FloatIt.mybinder;
-
-import androidx.annotation.RequiresApi;
 
 //import static com.example.roll.R.drawable.hhhhhhh;
 
@@ -82,7 +71,9 @@ public class Ball extends Activity {
     public void distroyball() {
         exists = 0;
         if(isconnectedtoServ == 1){
-        c.unbindService(myconnection);}
+        c.unbindService(myconnection);
+        isconnectedtoServ = 0 ;
+        }
     }
 
 

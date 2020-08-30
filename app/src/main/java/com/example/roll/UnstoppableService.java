@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -37,6 +38,7 @@ public class UnstoppableService extends Service {
 
             }
             else if(intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_RINGING)){
+                Toast.makeText(getApplicationContext(), "shit is happening ", Toast.LENGTH_LONG).show();
                 if(Elf1 != null ){
                     Elf1.distroyElf();
                 }

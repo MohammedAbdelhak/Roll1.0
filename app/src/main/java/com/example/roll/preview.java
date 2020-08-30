@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -22,7 +20,7 @@ import org.opencv.imgproc.Moments;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class preview extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
-    private static String TAG = "com.example.opencvtest";
+    private static String TAG = "preview";
     static{ System.loadLibrary("opencv_java3"); }
     static {
         boolean openCVStarted;
@@ -281,7 +279,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
             else {if(posx < firstX){
                 Diffrence = 1 ;
             }}}
-
+        Log.d(TAG , "x ="+ posx + " y = "+ posy);
 
         return grey;
     }

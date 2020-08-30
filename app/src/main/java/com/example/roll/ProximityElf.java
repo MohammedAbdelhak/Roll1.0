@@ -1,6 +1,7 @@
 package com.example.roll;
 
 
+import android.app.KeyguardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -16,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.opencv.android.JavaCameraView;
+
+import androidx.annotation.RequiresApi;
 
 import static android.content.Context.SENSOR_SERVICE;
 
@@ -28,7 +33,7 @@ public class ProximityElf implements SensorEventListener {
 
 
 
-
+    KeyguardManager myKM;
     SensorManager senseManager , senseManager2;
     Context cx;
     ImageView mystep , mystep2, mystep3 , mystep4;
@@ -46,6 +51,7 @@ public class ProximityElf implements SensorEventListener {
     Ball myball;
     int IsHapenning;
     Sensor ProximityMagic;
+    int FlashState = 0 ;
     myEye myservice;
     int Case ,Steps = 0 ;
 
@@ -106,6 +112,7 @@ public class ProximityElf implements SensorEventListener {
         mywidth = width;
         Case = 2 ;
         this.cx = ctx;
+        myKM = (KeyguardManager) cx.getSystemService(Context.KEYGUARD_SERVICE);
         senseManager = (SensorManager)ctx.getSystemService(SENSOR_SERVICE);
         ProximityMagic = senseManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         senseManager.registerListener(this,ProximityMagic,SensorManager.SENSOR_DELAY_NORMAL);
@@ -130,6 +137,7 @@ public class ProximityElf implements SensorEventListener {
                                 //Toast.makeText(cx, "On", Toast.LENGTH_SHORT).show();
                                 getpackage();
                                 Toast.makeText(cx, CurrentUserActivity, Toast.LENGTH_LONG).show();
+
                                 if (PackVerf == 0) {
                                     PackVerf = 1;
                                     handler.post(runnable2);
@@ -193,9 +201,9 @@ public class ProximityElf implements SensorEventListener {
                                 /*cx.stopService(i2); */
                                 connected = 0;
                                 IsHapenning = 1 ;
-                                if(myservice.Diffrence != 0){
+                                if(myservice.Diffrence != 0 && myservice.Diffrence != 3 ){
                                 myball.moveTheball(myservice.Diffrence);}
-                                if(myservice.Diffrence == 0 ){
+                                if(myservice.Diffrence == 0 || myservice.Diffrence == 3 ){
                                     IsHapenning = 0;
                                     myball.distroyball();
                                 }
@@ -306,18 +314,48 @@ public class ProximityElf implements SensorEventListener {
 
 
     final Runnable  runnable = new Runnable() {
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
         @Override
         public void run() {
             StartedTime = System.currentTimeMillis();
             if(ElfState == 1){
                 if(StartedTime == CurrentTime && didit != 1 && connected == 0){
-                    if(myball.myservice.isremoved != 1){
+                    if(myball.myservice.isremoved != 1 && myball.exists == 1){
                     myball.distroyball();}
+                    if( myKM.inKeyguardRestrictedInputMode() ) {
+                        CameraManager cameraManager = (CameraManager) cx.getSystemService(Context.CAMERA_SERVICE);
+                        try{
+                        String cameraId = cameraManager.getCameraIdList()[0];
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {
+                                if(FlashState == 0){
+                               cameraManager.setTorchMode(cameraId, true);
+                                Toast.makeText(cx , "Roll : Flash On" , Toast.LENGTH_LONG).show();
+                                    FlashState = 1 ; }
+                                else{
+                                    cameraManager.setTorchMode(cameraId, false);
+                                    Toast.makeText(cx , "Roll : Flash Off" , Toast.LENGTH_LONG).show();
+                                    FlashState = 0 ;
+                                }
+                            }
+
+
+
+
+                            }
+                        catch (Exception e){
+
+                        }
+
+                    } else {
+                        Toast.makeText(cx , "unlocked" , Toast.LENGTH_LONG).show();
+                    }
 
                     myball = null ;
                     didit = 1 ;
                 }
+
                 else{
+
                     handler.post(runnable);
                 }
 
@@ -325,7 +363,7 @@ public class ProximityElf implements SensorEventListener {
             else {
                 if(ElfState == 0){
                     if(StartedTime == CurrentTime && myball != null) {
-                        if(myball.myservice.isremoved != 1){
+                        if(myball.myservice.isremoved != 1 && myball.exists == 1){
                             myball.distroyball();}
                         myball = null ;
 
