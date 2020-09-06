@@ -1,6 +1,7 @@
 package com.example.roll;
 
 
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,18 +16,18 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.opencv.android.JavaCameraView;
 
 import androidx.annotation.RequiresApi;
 
-import static android.content.Context.SENSOR_SERVICE;
-
 //import org.opencv.android.JavaCameraView;
 
-public class ProximityElf implements SensorEventListener {
+public class ProximityElf extends Activity implements SensorEventListener {
     public static final String TAG = "com.example.roll";
 
     private static boolean openCVStarted = false ;
@@ -37,12 +38,10 @@ public class ProximityElf implements SensorEventListener {
     SensorManager senseManager , senseManager2;
     Context cx;
     ImageView mystep , mystep2, mystep3 , mystep4;
-    int didit =1, PackVerf , savor  ;
     static int  direction = 0 ;
-    int ElfState , connected;
-    ImageView backImg;
+    int ElfState , connected , IsHapenning ,  FlashState = 0  , Case ,Steps = 0 ,  didit =1, PackVerf , savor  , Rvalue , Lvalue  ;
     JavaCameraView myjvc;
-    Intent i , i2;
+    Intent  i2;
     float mywidth;
     long T1 , T2 ;
     ActivityCatcher ActivityMessenger;
@@ -50,11 +49,11 @@ public class ProximityElf implements SensorEventListener {
     private Handler handler = new Handler();
     long CurrentTime , StartedTime;
     Ball myball;
-    int IsHapenning;
     Sensor ProximityMagic;
-    int FlashState = 0 ;
+
     myEye myservice;
-    int Case ,Steps = 0 ;
+    LinearLayout myln ;
+
 
     ServiceConnection myconnection2 = new ServiceConnection() {
         @Override
@@ -75,7 +74,8 @@ public class ProximityElf implements SensorEventListener {
         }
     };
 
-    ProximityElf(Context ctx , ImageView step , ImageView step2 , ImageView step3 , ImageView step4 , JavaCameraView jvc){
+    ProximityElf(Context ctx , ImageView step , ImageView step2 , ImageView step3 , ImageView step4 , JavaCameraView jvc  , LinearLayout ln){
+        myln = ln ;
         Case = 1 ;
         Log.d("com.example.opencvtest" , " proximity elf is created ");
         this.cx = ctx;
@@ -108,8 +108,10 @@ public class ProximityElf implements SensorEventListener {
 
     }
 
-    ProximityElf(Context ctx , float width ){
+    ProximityElf(Context ctx , float width , int Rval , int Lval){
         IsHapenning =0;
+        Rvalue = Rval ;
+        Lvalue = Lval ;
         mywidth = width;
         Case = 2 ;
         this.cx = ctx;
@@ -118,10 +120,8 @@ public class ProximityElf implements SensorEventListener {
         ProximityMagic = senseManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         senseManager.registerListener(this,ProximityMagic,SensorManager.SENSOR_DELAY_NORMAL);
 
-        i = new Intent(cx, ActivityCatcher.class);
         i2 = new Intent(cx, myEye.class);
         ActivityMessenger = ActivityCatcher.getSharedInstance();
-        cx.startService(i);
     }
 
 
@@ -137,9 +137,14 @@ public class ProximityElf implements SensorEventListener {
                             savor = 0;
                             didit = didit + 1;
                             if (ElfState == 0 && myball == null) {
-                                //Toast.makeText(cx, "On", Toast.LENGTH_SHORT).show();
+
                                 getpackage();
-                                Toast.makeText(cx, CurrentUserActivity, Toast.LENGTH_LONG).show();
+                                Toast.makeText(cx , CurrentUserActivity , Toast.LENGTH_LONG).show();
+                                if(CurrentUserActivity.equals("com.sec.android.app.camera")){
+                                    PackVerf = 1 ;
+                                    Toast.makeText(cx, CurrentUserActivity, Toast.LENGTH_LONG).show();
+
+                                }
 
                                 if (PackVerf == 0) {
                                     PackVerf = 1;
@@ -150,7 +155,7 @@ public class ProximityElf implements SensorEventListener {
                         } else {
                             if (didit == 2) {
                                 T2 =  System.currentTimeMillis();
-                                if(T2 - T1 < 1500 && myKM.inKeyguardRestrictedInputMode()){
+                                if(T2 - T1 < 1000 && myKM.inKeyguardRestrictedInputMode()){
                                     CameraManager cameraManager = (CameraManager) cx.getSystemService(Context.CAMERA_SERVICE);
                                     try{
                                         String cameraId = cameraManager.getCameraIdList()[0];
@@ -178,46 +183,61 @@ public class ProximityElf implements SensorEventListener {
 
                                 }
 
-                            else {    connected = 1;
+                            else {
+                                if(T2 - T1 < 1000 && (CurrentUserActivity.equals("com.sec.android.app.camera") || CurrentUserActivity.equals("com.google.android.music") ) ){
+                                    Toast.makeText(cx, "camera called", Toast.LENGTH_SHORT).show();
+                                    Intent ii = new Intent(Intent.ACTION_MAIN);
+                                    ii.addCategory(Intent.CATEGORY_HOME);
+                                    ii.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    cx.startActivity(ii);
+                                } else {
+                                    if(!CurrentUserActivity.equals("com.sec.android.app.camera")){
+                                    connected = 1;
 
-                                //set the background and activate the EYE
-                                // 01 set the background according to package switch (package name).
+                                    //set the background and activate the EYE
+                                    // 01 set the background according to package switch (package name).
 
-                                switch (CurrentUserActivity) {
-                                    case "com.sec.android.app.launcher":
-                                        myball.setMyBackground2(1);
-                                        break;
+                                    switch (CurrentUserActivity) {
+                                        case "com.sec.android.app.launcher":
+                                            myball.setMyBackground2(1, Rvalue, Lvalue);
+                                            break;
 
-                                    case "com.android.systemui":
-                                        myball.setMyBackground2(1);
-                                        break;
-
-                                    case "com.samsung.android.dialer":
-                                        myball.setMyBackground2(2);
-                                        break;
-
-                                    case "com.google.android.music":
-                                        myball.setMyBackground2(3);
-                                        break;
-
-                                    case "com.sec.android.app.clockpackage":
-                                        myball.setMyBackground2(4);
-                                        break;
-
-                                    default:
-                                        connected = 0;
-                                        break;
-
-                                }
-                                if (connected == 1) {
-                                    //verifiying if we are in a identified case to lanch myeye
-
-                                    cx.bindService(i2, myconnection2, cx.BIND_AUTO_CREATE);
-                                }
+                                        case "com.android.systemui":
+                                            myball.setMyBackground2(1, Rvalue, Lvalue);
+                                            break;
 
 
+                                        case "com.google.android.music":
+                                            myball.setMyBackground2(3, Rvalue, Lvalue);
+                                            break;
 
-                            } didit = 1;
+                                        case "com.samsung.android.dialer":
+                                            myball.setMyBackground2(5, Rvalue, Lvalue);
+                                            break;
+                                        case "com.samsung.android.calendar":
+                                            myball.setMyBackground2(5, Rvalue, Lvalue);
+                                            break;
+                                        case "com.samsung.android.messaging":
+                                            myball.setMyBackground2(5, Rvalue, Lvalue);
+                                            break;
+                                        case "com.samsung.android.app.notes":
+                                            myball.setMyBackground2(5, Rvalue, Lvalue);
+                                            break;
+
+                                        default:
+                                            connected = 0;
+                                            break;
+
+                                    }
+                                    if (connected == 1) {
+                                        //verifiying if we are in a identified case to lanch myeye
+
+                                        cx.bindService(i2, myconnection2, cx.BIND_AUTO_CREATE);
+                                    }
+
+
+                                } } }
+                            didit = 1;
                         }
                         //////////////////////////////////////////////
                         //timer for 2 seconds
@@ -261,18 +281,20 @@ public class ProximityElf implements SensorEventListener {
                     if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
                         if (event.values[0] >= -4 && event.values[0] <= 4) {
                             if (Steps == 0) {
-                                myball = new Ball(cx, 2);
+                                myln.setVisibility(View.VISIBLE);
                             }
                             //near
+
+
                             Steps = Steps + 1;
-                            Toast.makeText(cx, "On", Toast.LENGTH_SHORT).show();
                             if (Steps == 1) {
                                 mystep.setImageResource(R.drawable.validated1);
+                                myjvc.enableView();
+
                             }
                             if (Steps == 2) {
                                 mystep3.setImageResource(R.drawable.validated3);
                             }
-                            myjvc.enableView();
 
                         } else {
                             //far
@@ -284,7 +306,9 @@ public class ProximityElf implements SensorEventListener {
                                 mystep4.setImageResource(R.drawable.validated4);
                                 Steps = 0;
                                 myjvc.disableView();
-                                myball = null;
+                                myln.setVisibility(View.INVISIBLE);
+                                this.distroyElf();
+
                             }
 
 
@@ -354,33 +378,6 @@ public class ProximityElf implements SensorEventListener {
                 if(StartedTime == CurrentTime && didit != 1 && connected == 0){
                     if(myball.myservice.isremoved != 1 && myball.exists == 1){
                     myball.distroyball();}
-                   /* if( myKM.inKeyguardRestrictedInputMode() ) {
-                        CameraManager cameraManager = (CameraManager) cx.getSystemService(Context.CAMERA_SERVICE);
-                        try{
-                        String cameraId = cameraManager.getCameraIdList()[0];
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {
-                                if(FlashState == 0){
-                               cameraManager.setTorchMode(cameraId, true);
-                                Toast.makeText(cx , "Roll : Flash On" , Toast.LENGTH_LONG).show();
-                                    FlashState = 1 ; }
-                                else{
-                                    cameraManager.setTorchMode(cameraId, false);
-                                    Toast.makeText(cx , "Roll : Flash Off" , Toast.LENGTH_LONG).show();
-                                    FlashState = 0 ;
-                                }
-                            }
-
-
-
-
-                            }
-                        catch (Exception e){
-
-                        }
-
-                    } else {
-                        Toast.makeText(cx , "unlocked" , Toast.LENGTH_LONG).show();
-                    }*/
 
                     myball = null ;
                     didit = 1 ;
@@ -443,24 +440,28 @@ public class ProximityElf implements SensorEventListener {
 
 
 
-  /*  final Runnable AllRunKiller = new Runnable() {
-        @Override
-        public void run() {
-            if(myball == null){
-                handler.removeCallbacks(runnable);
-                handler.removeCallbacks(runnable3);
-            }
 
-
-        }
-    };*/
 
 
 
 
     public void distroyElf(){
-        if( myball != null){  if(myball.exists == 1 ) {myball.distroyball();  handler.removeCallbacks(runnable); handler.removeCallbacks(runnable2);}}
-       if(Case == 1){ senseManager2.unregisterListener(this);
+       if(ActivityMessenger != null){
+           ActivityMessenger.stopcathing();
+       }
+
+
+        if( myball != null){
+            if(myball.exists == 1 ) {
+                myball.distroyball();
+                handler.removeCallbacks(runnable);
+                handler.removeCallbacks(runnable2);
+            }
+        }
+
+
+       if(Case == 1){
+           senseManager2.unregisterListener(this);
            try {
                finalize();
            } catch (Throwable throwable) {
@@ -470,13 +471,13 @@ public class ProximityElf implements SensorEventListener {
 
         if(Case == 2){
             senseManager.unregisterListener(this);
-        cx.stopService(i);
             try {
                 finalize();
             } catch (Throwable throwable) {
                 throwable.printStackTrace();
             }
         }
+
     }
 
 

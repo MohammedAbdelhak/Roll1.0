@@ -133,7 +133,7 @@ public class scenes extends AppCompatActivity {
 
     public void proceed(View v ){
         if(v.getId() == next.getId()){
-            Intent i = new Intent(this , Activation.class);
+            Intent i = new Intent(this , ScenarioSetup.class);
             startActivity(i);
 
             handler.removeCallbacks(runnable);

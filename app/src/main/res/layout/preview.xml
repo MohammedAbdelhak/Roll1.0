@@ -7,6 +7,23 @@
         android:layout_height="match_parent"
         tools:context=".preview"
         android:background="@drawable/background">
+    <LinearLayout
+        android:id="@+id/myball"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="14dp"
+        android:layout_alignTop="@id/upframe"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/circle_shape"
+        android:elevation="7dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_foreground"
+            />
+
+    </LinearLayout>
     <ImageView
         android:layout_width="350dp"
         android:layout_height="100dp"

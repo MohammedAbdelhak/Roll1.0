@@ -18,8 +18,6 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
 
@@ -48,18 +46,16 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
 
     /////////////////////////////////////////////
     Moments moment;
-   // Ball ball ;
     int Diffrence = 0 ;
     public JavaCameraView mycamera ;
     WindowManager wm1;
     LinearLayout myln;
     LinearLayout.LayoutParams llpar;
     WindowManager.LayoutParams wmpar;
-    public Mat rgbA , rgbAT  , coolestmatever ,bin1 , bin2 ,bin0 , bin3 ,bin4, sum , grey;
+    public Mat  grey;
     double m_area;
     public int posx= 0 , posy = 0 ,firstX , Fshot = 0 , firstY  ;
-    Scalar minc , maxc;
-
+    int gotit = 0 ;
 
 
 
@@ -79,14 +75,12 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
         mycamera.setCvCameraViewListener(this);
         wm1 = (WindowManager) getSystemService(WINDOW_SERVICE);
         myln = new LinearLayout(this);
-
         llpar = new LinearLayout.LayoutParams(2, 2);
         myln.setLayoutParams(llpar);
         wmpar = new WindowManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 400, WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSPARENT);
         wmpar.x = 0;
         wmpar.y = -700;
         wmpar.alpha = 0 ;
-
         myln.addView(mycamera);
         wm1.addView(myln, wmpar);
         return binderrr;
@@ -106,7 +100,6 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
 
     @Override
     public void onCameraViewStarted(int width, int height) {
-        Log.d(TAG , "Camera Started");
         grey = new Mat();
     }
 
@@ -116,24 +109,24 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
         mycamera.disableView();
         wm1.removeView(myln);
         grey.release();
+        try {
+            finalize();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
 
         grey.release();
-
-
-        // rgbA = inputFrame.rgba();
-        //Imgproc.cvtColor(rgbA , rgbAT , Imgproc.COLOR_RGB2HSV);
         grey =inputFrame.gray();
 
-        Imgproc.GaussianBlur(grey , grey,new Size(5,5) , 0);
+        //Imgproc.GaussianBlur(grey , grey,new Size(15,15) , 7);
         //Imgproc.GaussianBlur(rgbAT , rgbAT,new Size(5,5) , 0);
         //   Imgproc.medianBlur(rgbAT,rgbAT,9);
 
-        Imgproc.threshold( grey, grey , 150, 255,Imgproc.THRESH_BINARY );
-
+        Imgproc.threshold( grey, grey , 180, 200,Imgproc.THRESH_BINARY );
         moment =  Imgproc.moments(grey, true);
         m_area = moment.get_m00();
         posy= (int) (moment.get_m10() / m_area);
@@ -145,33 +138,34 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
             Fshot = 1 ;
         }
 
-        Log.d(TAG ,"x == "+ posx + "y == "+ posy);
-
-        if(posx > firstX){
-            Diffrence = 2;
-        }
-        else {if(posx < firstX){
+        if(posx >= 169 && gotit == 0 ){
             Diffrence = 1 ;
-        }}
-
+            gotit = 1 ;
+        }
+        else {
+            if(gotit == 0){
+            if (posx < firstX) {
+                Diffrence = 1;
+            } else {
+                if (posx > firstX) {
+                    Diffrence = 2;
+                }
+            }}
+        }
         }
         if(Diffrence == 2 ){
-            Log.d(TAG , "difrence is 2222222");
             if(posy <=7 &&  firstX - posx <10){
-                Log.d(TAG , "difrence is 33333");
 
                 Diffrence = 3 ;
-              //  Toast.makeText(this , "changed direction " , Toast.LENGTH_LONG).show();
             }
 
         }else {
         if(Diffrence == 1){
 
             if(posy<=7 && firstX - posx <10){
-                Diffrence = 3 ;
-           //     Toast.makeText(this , "changed direction " , Toast.LENGTH_LONG).show();
-            }
+                Diffrence = 3 ; }
         }}
+        moment = null ;
 
         return grey;
     }
@@ -182,12 +176,17 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
             onCameraViewStopped();
 
         Toast.makeText(getApplicationContext(), "unbinding", Toast.LENGTH_LONG).show();
+        try {
+            this.finalize();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        super.onDestroy();
         return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG ,"stopped");
         super.onDestroy();
     }
 }

@@ -1,39 +1,26 @@
 package com.example.roll;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.roll.FloatIt.mybinder;
 
-//import static com.example.roll.R.drawable.hhhhhhh;
 
 public class Ball extends Activity {
     FloatIt myservice;
     Context c;
-    ImageView Background;
-    int UserAct , mydif , myX , isconnectedtoServ;
+    int UserAct , mydif  , isconnectedtoServ;
     ImageView backImg ;
     private float halfW ;
-    private AnimatorSet animatorSet;
-    private ObjectAnimator lftToRgt,rgtToLft;
-
-    private AlarmManager alarmMgr;
-    private PendingIntent alarmIntent;
-    int exists = 0;
-    AudioManager mAudioManager, mAlarmManager;
-    private static final String TAG = "com.example.roll";
+    int r , l ,exists = 0;
+    AudioManager mAudioManager;
     String SpecialCommand;
 
     ServiceConnection myconnection = new ServiceConnection() {
@@ -41,8 +28,6 @@ public class Ball extends Activity {
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             mybinder mylclbinder = (mybinder) iBinder;
             myservice = mylclbinder.getService();
-            //Log.d(TAG,"" + x);
-            myX= myservice.mytransx;
             if(halfW == 2){
                 myservice.BallPos = 150;
             myservice.wmpar.y = -626;
@@ -55,6 +40,7 @@ public class Ball extends Activity {
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             isconnectedtoServ = 0;
+
         }
     };
 
@@ -71,14 +57,13 @@ public class Ball extends Activity {
     public void distroyball() {
         exists = 0;
         if(isconnectedtoServ == 1){
-        c.unbindService(myconnection);
+            c.unbindService(myconnection);
+
         isconnectedtoServ = 0 ;
         }
+        Log.d("myTAG" , "distroyed is called");
+
     }
-
-
-
-
 
 
 
@@ -88,31 +73,38 @@ public class Ball extends Activity {
 
 
     public void setMyBackground(final ImageView myback) {
-        Background = myback;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                myservice.SetImageBackground(myback);
+                myservice.SetImageBackground(myback );
             }
         });
     }
 
+    public void setMyBackground3(final ImageView myback , final int Rvalue , final int Lvalue) {
+        r = Rvalue;
+        l = Lvalue ;
+        if(Rvalue == 0 && Lvalue == 0){this.setMyBackground(myback);}
+        else{
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myservice.SetImageBackground2(myback , Rvalue , Lvalue);
+            }
+        });
+    }}
 
-    public void setMyBackground2(int UserAct) {
+    public void setMyBackground2(int UserAct , int R , int L) {
             this.UserAct = UserAct;
         switch (UserAct) {
-            case 1:  /*main*/ UserAct = 1 ;
-                MainMethode(0 , 1);
+            case 1:
+                MainMethode(0 , 1 , R , L);
                 break;
-            case 2:             UserAct = 2 ;
-                break;
-            case 3: /*music */  UserAct = 3 ;
+            case 3:
                 MusicMethode(0, 1);
                 break;
-            case 4: /*alarm */  UserAct = 4 ;
-                AlarmMethode(0, 1);
+            case 5 :  NavigateMethod( 0 , 1);
                 break;
-
 
         }
 
@@ -132,7 +124,6 @@ public class Ball extends Activity {
 
 
         }
-
 
     public void MusicMethode(int diff, int step) {
         mAudioManager = (AudioManager) c.getSystemService(Context.AUDIO_SERVICE);
@@ -167,117 +158,53 @@ public class Ball extends Activity {
         }
     }
 
-
-    public void AlarmMethode(int diff, int step) {
-
-        if (step == 1) {
-            backImg.setImageResource(R.drawable.alaramscenario);
-            this.setMyBackground(backImg);
-
-        } else {
-            if (step == 2) {
-                if (diff == 1) {
-                    alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    Intent intent = new Intent(getBaseContext(), Ball.class);
-                    PendingIntent pIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarmMgr.cancel(pIntent);
-                } else {
-                    if (diff == 2) {
-
-
-                        alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                        Intent intent = new Intent(getApplicationContext(), Ball.class);
-                        alarmIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, intent, 0);
-
-                        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                                SystemClock.elapsedRealtime() +
-                                        120 * 1000, alarmIntent);
-                    }
-                }
-                distroyball();
-
-            }
-        }
-
-
-    }
-
-
-    public void MainMethode(int diff , int step){
+    public void MainMethode(int diff , int step , int R , int L){
         if(step == 1 ){
-            backImg.setImageResource(R.drawable.mainscenario);
-            this.setMyBackground(backImg);
+            if(L == 0 && R == 0 ){
+            backImg.setImageResource(com.example.roll.R.drawable.mainscenario ); this.setMyBackground3(backImg , R , L);}
+            else {
+                backImg.setImageResource(com.example.roll.R.drawable.allcontainer );
+            this.setMyBackground3(backImg , R , L);}
 
         }
         else {
             if(step == 2){
                 if (diff == 1) {
+                    if(r== 0){
                     Intent phoneint = c.getPackageManager().getLaunchIntentForPackage("com.sec.android.app.camera");
-                    c.startActivity(phoneint);
+                    c.startActivity(phoneint);}
+                    else {
+                        taskchooser(r);
+                    }
                 } else {
                     if (diff == 2) {
-
+                        if(l == 0 ){
                         Intent phoneint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.dialer");
-                        c.startActivity(phoneint);
+                        c.startActivity(phoneint);}
+                        else {
+                            taskchooser(l);
+                        }
 
                     }
                 }
                 distroyball();
 
-
             }
         }
-
-    }
-
-    public void CallMethode (int diff , int step){
-             if(step == 1 ){
-                 backImg.setImageResource(R.drawable.phonescenario);
-                  this.setMyBackground(backImg);
-
-        }
-        else {
-             if(step == 2){
-
-
-
-                 if (diff == 1) {
-                    //respond
-
-
-                } else {
-                    if (diff == 2) {
-                    //end call
-
-
-
-                    }
-                }
-                distroyball();
-
-
-            }
-        }
-
-
-
 
     }
 
     public void doSomething( int dif ){
-        Log.d(TAG , "UserAct : "+ UserAct);
-        Log.d(TAG , "dif : "+ dif);
+
         switch (UserAct) {
-            case 1:  /*main*/ UserAct = 1 ;
-                MainMethode(dif , 2);
+            case 1:  /*main*/
+                MainMethode(dif , 2 , 0 ,0);
                 break;
-            case 2:  CallMethode(dif , 2); UserAct = 2 ;
-                break;
-            case 3: /*music */  UserAct = 3 ;
+            case 3: /*music */
                 MusicMethode(dif, 2);
                 break;
-            case 4: /*alarm */  UserAct = 4 ;
-                AlarmMethode(dif, 2);
+                case 5 :
+                NavigateMethod(dif , 2);
                 break;
 
         }
@@ -285,7 +212,53 @@ public class Ball extends Activity {
 
 
 
+
+
+
     }
+
+    public void taskchooser(int t){
+        switch (t){
+            case 1 : Intent phoneint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.dialer"); c.startActivity(phoneint); break;
+            case 2 : Intent cameraint = c.getPackageManager().getLaunchIntentForPackage("com.sec.android.app.camera"); c.startActivity(cameraint);break;
+            case 3 : Intent musicint  = c.getPackageManager().getLaunchIntentForPackage("com.google.android.music"); c.startActivity(musicint); break;
+            case 4 : Intent calendarint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.calendar"); c.startActivity(calendarint); break;
+            case 5 : Intent msgint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.messaging"); c.startActivity(msgint); break;
+            case 6 : Intent noteint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.app.notes"); c.startActivity(noteint);break;
+        }
+    }
+
+    public void NavigateMethod(int diff , int step){
+        if(step == 1){
+            backImg.setImageResource(R.drawable.homereturnpanel);
+            this.setMyBackground(backImg);
+        }
+        else{
+            if (step == 2 ){
+
+                if (diff == 1) {
+                    Intent i = new Intent(Intent.ACTION_MAIN);
+                    i.addCategory(Intent.CATEGORY_HOME);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    c.startActivity(i);
+                } else {
+                    if (diff == 2) {
+                        Intent i = new Intent(Intent.ACTION_MAIN);
+                        i.addCategory(Intent.CATEGORY_HOME);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        c.startActivity(i);
+                    }
+                }
+                distroyball();
+
+
+
+
+        }}
+
+   }
+
+
 
 }
 

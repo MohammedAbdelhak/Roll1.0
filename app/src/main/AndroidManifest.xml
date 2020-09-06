@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.roll" >
+     xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.roll">
+
     <application
         android:name=".Unstoppable"
         android:allowBackup="true"
@@ -9,12 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activation" android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".scenes" android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".preview" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PermisionsActivity" android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ScenarioSetup" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".scenes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".preview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PermisionsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,25 +34,22 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".ActivityCatcher"
+        <receiver android:name=".IncomingCallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".ActivityCatcher"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
         </service>
-        <service android:name=".myEye"/>
+        <service android:name=".myEye" />
         <service android:name=".FloatIt" />
+
         <service android:name=".UnstoppableService" />
-
-        <receiver android:name=".IncomingCallReceiver"  >
-            <intent-filter >
-
-                <action android:name="android.intent.action.PHONE_STATE" />
-
-            </intent-filter>
-        </receiver>
-
-
     </application>
     <uses-feature
         android:name="android.hardware.camera.autofocus"
@@ -51,13 +60,16 @@
     <uses-feature
         android:name="android.hardware.camera.front.autofocus"
         android:required="false" />
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="false" />
 
-    <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
-    <uses-feature android:name="android.hardware.camera.front.autofocus" android:required="false"/>
     <uses-feature android:name="android.hardware.camera.flash" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
@@ -65,6 +77,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <uses-permission android:name="android.permission.PROCESS_INCOMING_CALLS" />
 
 </manifest>

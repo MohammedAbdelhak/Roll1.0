@@ -1,18 +1,22 @@
 package com.example.roll;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
@@ -33,20 +37,18 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
             openCVStarted = true;
         }
     }
-    public Mat rgbA , rgbAT ,grey , coolestmatever ,sum;
-    public Mat bin0 , bin1 ,bin2 , bin3 ,bin4;
+    public Mat grey ;
     ImageView next ;
     ImageView firststep ,secondstep ,thirdstep , forthstep;
     ProximityElf pmelf ;
-    Moments moment, moment2;
+    Moments moment;
     JavaCameraView mycamera;
-    Scalar minc0 , maxc0 , minc1 , maxc1, minc2 , maxc2 , minc3 , maxc3 ,minc4 , maxc4 ;
-    double m_area, m_area2;
-    public int posx= 0 , posy = 0 , verifi = 0 , posx2 , posy2;
-    double[] hsv0 = new double[3] ,  hsv1 = new double[3],  hsv2 = new double[3],  hsv3 = new double[3],  hsv4 = new double[3];
+    LinearLayout myln ;
+    double m_area;
+    public int posx= 0 , posy = 0 ;
     Ball myball;
-    int firstX , Fshot , Diffrence;
-
+    int firstX , Fshot , Diffrence ;
+    float halfW;
 
 
     @Override
@@ -59,10 +61,13 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         thirdstep = findViewById(R.id.step3);
         forthstep = findViewById(R.id.step4);
         mycamera =  findViewById(R.id.mycamera);
-        pmelf = new ProximityElf(getApplicationContext(), firststep , secondstep , thirdstep,forthstep, mycamera);
+        myln = findViewById(R.id.myball);
+        myln.setVisibility(View.INVISIBLE);
         mycamera.setCameraIndex(1);
         mycamera.setVisibility(SurfaceView.VISIBLE);
         mycamera.setCvCameraViewListener(preview.this);
+        pmelf = new ProximityElf(getApplicationContext(), firststep , secondstep , thirdstep,forthstep, mycamera , myln);
+
 
     }
 
@@ -239,9 +244,8 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
 
     @Override
     public void onCameraViewStopped() {
-        myball.moveTheball(Diffrence);
-        h1.postDelayed(r1 , 2000);
-
+        /* move your ln */
+         animate(Diffrence);
         grey.release();
     }
 
@@ -255,11 +259,11 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         //Imgproc.cvtColor(rgbA , rgbAT , Imgproc.COLOR_RGB2HSV);
         grey =inputFrame.gray();
 
-        Imgproc.GaussianBlur(grey , grey,new Size(5,5) , 0);
+        Imgproc.GaussianBlur(grey , grey,new Size(15,15) , 0);
         //Imgproc.GaussianBlur(rgbAT , rgbAT,new Size(5,5) , 0);
         //   Imgproc.medianBlur(rgbAT,rgbAT,9);
 
-        Imgproc.threshold( grey, grey , 150, 255,Imgproc.THRESH_BINARY );
+        Imgproc.threshold( grey, grey , 180, 200,Imgproc.THRESH_BINARY );
 
         moment =  Imgproc.moments(grey, true);
         m_area = moment.get_m00();
@@ -297,5 +301,26 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         }
     };
 
+    public void animate(int dif){
+        ObjectAnimator lftToRgt,rgtToLft;
+        AnimatorSet animatorSet;
+        Display display = getWindowManager().getDefaultDisplay();
+        Point point=new Point();
+        display.getSize(point);
+        final int width = point.x; // screen width
+        halfW = -(width/7.0f)  ;
+        animatorSet = new AnimatorSet();
+        if(dif == 1){
+        lftToRgt = ObjectAnimator.ofFloat( myln,"translationX",0f,halfW )
+                .setDuration(700);
+        animatorSet.play( lftToRgt );}
+        else {
+            rgtToLft = ObjectAnimator.ofFloat( myln,"translationX",halfW,0f )
+                    .setDuration(700);
+            animatorSet.play( rgtToLft );
+            }
+        animatorSet.start();
+
+    }
 
 }

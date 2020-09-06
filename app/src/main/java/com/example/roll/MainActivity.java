@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
    else {
        Toast toast = Toast.makeText(this , "Roll : ByeBye ! " , Toast.LENGTH_LONG);
             toast.show();
-            finish();
+            onDestroy();
    }
 
         }

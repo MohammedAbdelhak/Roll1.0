@@ -17,7 +17,7 @@ public class Activation extends AppCompatActivity {
     int onclick = 0 ;
     Intent i;
     private float halfW;
-
+    int Rval , Lval ;
 
 
 
@@ -28,9 +28,9 @@ public class Activation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activate);
-
-
-
+       Intent iii = getIntent();
+        Rval = iii.getIntExtra("Rval", 0);
+        Lval = iii.getIntExtra("Lval", 0);
         activatebutton = findViewById(R.id.ActivateButton);
         Deactivate = findViewById(R.id.DActivateButton);
         Display display = getWindowManager().getDefaultDisplay();
@@ -46,6 +46,8 @@ public class Activation extends AppCompatActivity {
                     onclick =1;
                     i = new Intent(getApplicationContext() , UnstoppableService.class);
                     i.putExtra("width", halfW);
+                    i.putExtra("Rval" , Rval);
+                    i.putExtra("Lval" , Lval);
                     startService(i);
                     finish();
                     //start service

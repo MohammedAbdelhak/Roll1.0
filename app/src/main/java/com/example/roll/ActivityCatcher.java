@@ -3,15 +3,9 @@ package com.example.roll;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.Activity;
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+import android.os.Build;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
-
-
-import androidx.annotation.Nullable;
 public class ActivityCatcher extends AccessibilityService {
     private static final String TAG   ="com.example.roll";
     public static String packagecurrent = null , oldpackage = null ;
@@ -74,8 +68,11 @@ public class ActivityCatcher extends AccessibilityService {
         return sSharedInstance;
     }
 
-
-
+    public void stopcathing(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            this.disableSelf();
+        }
+    }
 
 
 }
