@@ -126,7 +126,7 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
         //Imgproc.GaussianBlur(rgbAT , rgbAT,new Size(5,5) , 0);
         //   Imgproc.medianBlur(rgbAT,rgbAT,9);
 
-        Imgproc.threshold( grey, grey , 180, 200,Imgproc.THRESH_BINARY );
+        Imgproc.threshold( grey, grey , 190, 200,Imgproc.THRESH_BINARY );
         moment =  Imgproc.moments(grey, true);
         m_area = moment.get_m00();
         posy= (int) (moment.get_m10() / m_area);

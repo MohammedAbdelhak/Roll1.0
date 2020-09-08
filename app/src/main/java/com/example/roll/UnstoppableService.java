@@ -44,6 +44,8 @@ public class UnstoppableService extends Service {
         Elf1 = new ProximityElf(this ,width , R , L );
         Intent notificationintent = new Intent(this , Activation.class);
         PendingIntent pendingIntent =  PendingIntent.getActivity(this , 0 , notificationintent , 0);
+        notificationintent.putExtra("Rval" , R);
+        notificationintent.putExtra("Lval" , L);
 
         Notification notification = new NotificationCompat.Builder(this , CHANNEL_ID)
                 .setContentTitle("Roll is Running")

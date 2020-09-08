@@ -306,8 +306,6 @@ public class ProximityElf extends Activity implements SensorEventListener {
                                 mystep4.setImageResource(R.drawable.validated4);
                                 Steps = 0;
                                 myjvc.disableView();
-                                myln.setVisibility(View.INVISIBLE);
-                                this.distroyElf();
 
                             }
 

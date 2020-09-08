@@ -186,7 +186,39 @@
         />
 
 
+        <ImageView
+            android:id="@+id/returnscene"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/homereturnpanel"
+            android:layout_marginTop="270dp"
+            />
+        <LinearLayout
+            android:id="@+id/myball4"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="296dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_shape"
+            android:elevation="7dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher_foreground"
+                />
 
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scénario de Navigation\n    (retourne/home)"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="12dp"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginTop="343dp"
+            />
 
 
 

@@ -45,11 +45,12 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
     JavaCameraView mycamera;
     LinearLayout myln ;
     double m_area;
-    public int posx= 0 , posy = 0 ;
+    public int posx= 0 , posy = 0 , width ;
     Ball myball;
     int firstX , Fshot , Diffrence ;
-    float halfW;
-
+    float halfW , halfW2;
+    ObjectAnimator lftToRgt,rgtToLft;
+    AnimatorSet animatorSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,7 +246,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
     @Override
     public void onCameraViewStopped() {
         /* move your ln */
-         animate(Diffrence);
+         animate();
         grey.release();
     }
 
@@ -263,7 +264,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         //Imgproc.GaussianBlur(rgbAT , rgbAT,new Size(5,5) , 0);
         //   Imgproc.medianBlur(rgbAT,rgbAT,9);
 
-        Imgproc.threshold( grey, grey , 180, 200,Imgproc.THRESH_BINARY );
+        Imgproc.threshold( grey, grey , 190, 200,Imgproc.THRESH_BINARY );
 
         moment =  Imgproc.moments(grey, true);
         m_area = moment.get_m00();
@@ -294,6 +295,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
     Runnable r1 = new Runnable() {
         @Override
         public void run() {
+
             firststep.setImageResource(R.drawable.prevstep1);
             secondstep.setImageResource(R.drawable.prevstep2);
             thirdstep.setImageResource(R.drawable.prevstep3);
@@ -301,26 +303,64 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         }
     };
 
-    public void animate(int dif){
-        ObjectAnimator lftToRgt,rgtToLft;
-        AnimatorSet animatorSet;
+    public void animate(){
+
         Display display = getWindowManager().getDefaultDisplay();
         Point point=new Point();
         display.getSize(point);
-        final int width = point.x; // screen width
-        halfW = -(width/7.0f)  ;
+        width = point.x; // screen width
+        halfW = -(width/7.0f) ;
+        halfW2 = -1 * (width/7.0f) ;
+
         animatorSet = new AnimatorSet();
-        if(dif == 1){
-        lftToRgt = ObjectAnimator.ofFloat( myln,"translationX",0f,halfW )
-                .setDuration(700);
-        animatorSet.play( lftToRgt );}
-        else {
-            rgtToLft = ObjectAnimator.ofFloat( myln,"translationX",halfW,0f )
-                    .setDuration(700);
-            animatorSet.play( rgtToLft );
-            }
-        animatorSet.start();
+        h1.post(r2);
+        h1.postDelayed(r1 , 1500);
 
     }
+
+
+    Runnable r2 = new Runnable() {
+        @Override
+        public void run() {
+            if(Diffrence == 1){
+
+
+                halfW = -halfW;
+
+                lftToRgt = ObjectAnimator.ofFloat( myln,"translationX",0f,halfW )
+                        .setDuration(700);
+
+                rgtToLft = ObjectAnimator.ofFloat( myln,"translationX",halfW,0f )
+                        .setDuration(700);
+
+                animatorSet.play( lftToRgt ).before( rgtToLft ); // manage sequence
+                animatorSet.start();
+
+
+
+
+
+
+            }
+            else {
+                if(Diffrence == 2){
+
+
+                    lftToRgt = ObjectAnimator.ofFloat( myln,"translationX", 0f , halfW2)
+                            .setDuration(700);
+                    rgtToLft = ObjectAnimator.ofFloat( myln,"translationX",halfW2,0f )
+                            .setDuration(700);
+
+                    animatorSet.play( lftToRgt ).before( rgtToLft );
+                    animatorSet.start();
+
+
+
+
+                }}
+
+
+        }
+    };
 
 }

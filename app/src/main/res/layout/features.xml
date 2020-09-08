@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ScenarioSetup"
-    android:background="@drawable/background">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/myball"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="59dp"
-        android:layout_alignTop="@id/ballcontainer"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/circle_shape"
-        android:elevation="7dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_foreground"
-            />
 
-    </LinearLayout>
+
 
 
 
@@ -38,111 +17,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         />
-    <ImageView
-        android:id="@+id/left"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:src="@drawable/llight"
-        android:layout_weight="1"
-        android:layout_alignLeft="@id/ballcontainer"
-        android:layout_alignTop="@id/ballcontainer"
-        android:layout_alignBottom="@id/ballcontainer"
-        android:layout_marginLeft="22dp"
-        android:elevation="1dp"
-        android:onClick="clicked"
-        />
-    <ImageView
-        android:id="@+id/right"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:src="@drawable/rlight"
-        android:layout_weight="1"
-        android:layout_alignRight="@id/ballcontainer"
-        android:layout_alignTop="@id/ballcontainer"
-        android:layout_alignBottom="@id/ballcontainer"
-        android:layout_marginRight="22dp"
-        android:elevation="1dp"
-        android:onClick="clicked"
-        />
 
-    <ImageView
-        android:id="@+id/ballcontainer"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/title"
-        android:src="@drawable/settingballcontainer"
-        android:layout_marginTop="15dp"
-        />
-    <ImageView
-        android:id="@+id/appcontainer"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/ballcontainer"
-        android:src="@drawable/appcontainer"
-        />
-    <LinearLayout
-        android:id="@+id/approw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignLeft="@id/appcontainer"
-        android:layout_alignRight="@id/appcontainer"
-        android:layout_alignTop="@id/appcontainer"
-        android:layout_alignBottom="@id/appcontainer"
-        android:gravity="center"
-        >
-        <ImageView
-            android:id="@+id/phoneapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/phone"
-            android:layout_weight="1"
-            android:onClick="clicked"
-            />
-        <ImageView
-            android:id="@+id/cameraapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/camera"
-            android:layout_weight="1"
-            android:onClick="clicked"
-            />
-        <ImageView
-            android:id="@+id/musicplayapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/play"
-            android:layout_weight="1"
-            android:onClick="clicked"
-            />
-        <ImageView
-            android:id="@+id/calendarapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/calendar"
-            android:layout_weight="1"
-            android:onClick="clicked"
-            />
-        <ImageView
-            android:id="@+id/messagesapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/messenger"
-            android:layout_weight="1"
-            android:onClick="clicked"
-            />
-        <ImageView
-            android:id="@+id/notesapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/notes"
-            android:layout_weight="1"
-            android:onClick="clicked"
-            />
 
-    </LinearLayout>
     <ImageView
         android:id="@+id/title"
         android:layout_width="250dp"
@@ -163,7 +39,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="44dp"
         android:layout_centerHorizontal="true"
-        android:onClick="proceed"
+        android:onClick="proceed2"
         />
     <ImageView
         android:id="@+id/previous"
@@ -174,14 +50,52 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="44dp"
         android:layout_centerHorizontal="true"
-        android:onClick="proceed"
+        android:onClick="proceed2"
         />
-
-
+    <ImageView
+        android:id="@+id/scenesframe"
+        android:layout_width="255dp"
+        android:layout_height="420dp"
+        android:src="@drawable/scenarioz"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        />
+    <ImageView
+        android:id="@+id/apps"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title"
+        android:src="@drawable/cameramusicflash"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:id="@+id/first_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pour quitter l'application 'Camera'\n ou l'application de 'Phone Dial'\nagitez deux fois la main sur\nle capteur de proximité\nen un mouvement rapide."
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/apps"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
+    <TextView
+        android:id="@+id/second_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Et lorsque le téléphone est inactif\n utilisez le même mouvement\n pour (allumer / éteindre) le flash"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/first_text"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Personnaliser le scénario"
+        android:text="Fonctionalité Speciale"
         android:layout_alignTop="@id/title"
         android:layout_alignLeft="@id/title"
         android:layout_alignRight="@id/title"
@@ -191,30 +105,7 @@
         android:textColor="@color/white"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1- choisir l'emplacement\n(R- droite / L- gauche)"
-        android:layout_alignTop="@id/centerframem"
-        android:layout_alignLeft="@id/centerframem"
-        android:layout_alignRight="@id/centerframem"
-        android:layout_marginTop="110dp"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/one"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2- choisissez l'application \nà placer"
-        android:layout_alignTop="@id/centerframem"
-        android:layout_alignLeft="@id/centerframem"
-        android:layout_alignRight="@id/centerframem"
-        android:layout_marginTop="250dp"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="@color/one"
-        />
+
 
     <ImageView
         android:layout_width="wrap_content"
@@ -224,16 +115,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pour la fonction de lancement rapide\nRoll permet à l'utilisateur \nde personnaliser ses choix.\nSi l'utilisateur ne change pas les choix \n les choix par défaut seront activés\n(appareil photo / téléphone)."
-        android:layout_below="@id/approw"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="17dp"
-        android:textColor="@color/one"
-        />
+
     <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -28,9 +28,9 @@ public class Activation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activate);
-       Intent iii = getIntent();
-        Rval = iii.getIntExtra("Rval", 0);
-        Lval = iii.getIntExtra("Lval", 0);
+          Intent iii = getIntent();
+        Rval = iii.getIntExtra("Rval", Rval);
+        Lval = iii.getIntExtra("Lval", Lval);
         activatebutton = findViewById(R.id.ActivateButton);
         Deactivate = findViewById(R.id.DActivateButton);
         Display display = getWindowManager().getDefaultDisplay();
@@ -62,9 +62,11 @@ public class Activation extends AppCompatActivity {
         Deactivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText( getApplicationContext()  , "Désactivé (Scénario par défault)  ", Toast.LENGTH_LONG).show();
                     i = new Intent(getApplicationContext() , UnstoppableService.class);
                     stopService(i);
+
+
                     onclick = 0;
 
             }
