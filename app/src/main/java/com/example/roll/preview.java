@@ -16,10 +16,16 @@ import android.widget.LinearLayout;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,7 +57,8 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
     float halfW , halfW2;
     ObjectAnimator lftToRgt,rgtToLft;
     AnimatorSet animatorSet;
-
+    List<MatOfPoint> contours;
+    Mat hierarchy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -241,6 +248,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         myball = pmelf.myball;
         Log.d(TAG , "Camera Started");
         grey = new Mat();
+         hierarchy = new Mat();
     }
 
     @Override
@@ -254,7 +262,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
 
         grey.release();
-
+        hierarchy.release();
 
         // rgbA = inputFrame.rgba();
         //Imgproc.cvtColor(rgbA , rgbAT , Imgproc.COLOR_RGB2HSV);
@@ -264,9 +272,29 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
         //Imgproc.GaussianBlur(rgbAT , rgbAT,new Size(5,5) , 0);
         //   Imgproc.medianBlur(rgbAT,rgbAT,9);
 
-        Imgproc.threshold( grey, grey , 190, 200,Imgproc.THRESH_BINARY );
+        //Imgproc.threshold( grey, grey , 170, 200,Imgproc.THRESH_BINARY );
+        Imgproc.Canny(grey, grey, 50, 150);
+        contours = new ArrayList<>();
 
-        moment =  Imgproc.moments(grey, true);
+        Imgproc.findContours(grey, contours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
+        int index = 0;
+
+        double maxim;
+        for (int contourIdx = 1; contourIdx < contours.size();contourIdx++)
+        {
+            double temp;
+            temp=Imgproc.contourArea(contours.get(contourIdx));
+            if(Imgproc.contourArea(contours.get(0))<temp)
+            {
+                maxim=temp;
+                index=contourIdx;
+            }
+        }
+
+        Mat drawing = Mat.zeros(grey.size(), CvType.CV_8UC1);
+        Imgproc.drawContours(drawing, contours, index, new Scalar(255), 15);
+
+        moment =  Imgproc.moments(drawing, true);
         m_area = moment.get_m00();
         posy= (int) (moment.get_m10() / m_area);
         posx = (int) (moment.get_m01() / m_area);
@@ -286,7 +314,7 @@ public class preview extends AppCompatActivity implements CameraBridgeViewBase.C
             }}}
         Log.d(TAG , "x ="+ posx + " y = "+ posy);
 
-        return grey;
+        return drawing;
     }
 
     Handler h1 = new Handler();

@@ -1,7 +1,6 @@
 package com.example.roll;
 
 
-
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -17,9 +16,16 @@ import android.widget.Toast;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 
@@ -56,6 +62,8 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
     double m_area;
     public int posx= 0 , posy = 0 ,firstX , Fshot = 0 , firstY  ;
     int gotit = 0 ;
+    List<MatOfPoint> contours;
+    Mat hierarchy;
 
 
 
@@ -101,6 +109,7 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
     @Override
     public void onCameraViewStarted(int width, int height) {
         grey = new Mat();
+        hierarchy = new Mat();
     }
 
     @Override
@@ -108,7 +117,7 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
 
         mycamera.disableView();
         wm1.removeView(myln);
-        grey.release();
+//        grey.release();
         try {
             finalize();
         } catch (Throwable throwable) {
@@ -120,18 +129,39 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
 
         grey.release();
+        hierarchy.release();
         grey =inputFrame.gray();
 
-        //Imgproc.GaussianBlur(grey , grey,new Size(15,15) , 7);
-        //Imgproc.GaussianBlur(rgbAT , rgbAT,new Size(5,5) , 0);
-        //   Imgproc.medianBlur(rgbAT,rgbAT,9);
 
+        Imgproc.GaussianBlur(grey , grey, new Size(15,15) , 0);
         Imgproc.threshold( grey, grey , 190, 200,Imgproc.THRESH_BINARY );
-        moment =  Imgproc.moments(grey, true);
+        Imgproc.Canny(grey, grey, 30, 90);
+        contours = new ArrayList<>();
+
+        Imgproc.findContours(grey, contours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        int index = 0;
+        double maxim;
+
+        for (int contourIdx = 1; contourIdx < contours.size();contourIdx++)
+        {
+            double temp;
+            temp=Imgproc.contourArea(contours.get(contourIdx));
+            if(Imgproc.contourArea(contours.get(0))<temp)
+            {
+                maxim=temp;
+                index=contourIdx;
+            }
+        }
+
+        Mat drawing = Mat.zeros(grey.size(), CvType.CV_8UC1);
+        Imgproc.drawContours(drawing, contours, index, new Scalar(255), 15);
+
+        moment =  Imgproc.moments(drawing, true);
         m_area = moment.get_m00();
         posy= (int) (moment.get_m10() / m_area);
         posx = (int) (moment.get_m01() / m_area);
-        if(posx != 0 && posy != 0){
+       /* if(posx != 0 && posy != 0){
         if(Fshot == 0){
             firstX = posx;
             firstY = posy;
@@ -164,10 +194,24 @@ public class myEye extends Service implements CameraBridgeViewBase.CvCameraViewL
 
             if(posy<=7 && firstX - posx <10){
                 Diffrence = 3 ; }
-        }}
-        moment = null ;
+        }}*/
+        if(posx != 0){
+            if(Fshot == 0){
+                firstX = posx;
+                Fshot = 1 ;
+            }
 
-        return grey;
+
+
+            if(posx > firstX){
+                Diffrence = 2;
+            }
+            else {if(posx < firstX){
+                Diffrence = 1 ;
+            }}}
+        moment = null ;
+        grey.release();
+        return drawing;
     }
 
     @Override

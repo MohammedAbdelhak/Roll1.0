@@ -142,7 +142,6 @@ public class ProximityElf extends Activity implements SensorEventListener {
                                 Toast.makeText(cx , CurrentUserActivity , Toast.LENGTH_LONG).show();
                                 if(CurrentUserActivity.equals("com.sec.android.app.camera")){
                                     PackVerf = 1 ;
-                                    Toast.makeText(cx, CurrentUserActivity, Toast.LENGTH_LONG).show();
 
                                 }
 
@@ -185,12 +184,14 @@ public class ProximityElf extends Activity implements SensorEventListener {
 
                             else {
                                 if(T2 - T1 < 1000 && (CurrentUserActivity.equals("com.sec.android.app.camera") || CurrentUserActivity.equals("com.google.android.music") ) ){
-                                    Toast.makeText(cx, "camera called", Toast.LENGTH_SHORT).show();
                                     Intent ii = new Intent(Intent.ACTION_MAIN);
                                     ii.addCategory(Intent.CATEGORY_HOME);
                                     ii.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     cx.startActivity(ii);
+                                    PackVerf = 0 ;
+
                                 } else {
+
                                     if(!CurrentUserActivity.equals("com.sec.android.app.camera")){
                                     connected = 1;
 
@@ -245,7 +246,10 @@ public class ProximityElf extends Activity implements SensorEventListener {
                         ElfState = 1;
 
 
-                    }} else {
+                    }}
+
+
+                    else {
                         //far
                         if (ElfState == 1) {
                             //             Toast.makeText(cx, "Off", Toast.LENGTH_SHORT).show();
@@ -375,8 +379,10 @@ public class ProximityElf extends Activity implements SensorEventListener {
             if(ElfState == 1){
                 if(StartedTime == CurrentTime && didit != 1 && connected == 0){
                     if(myball.myservice.isremoved != 1 && myball.exists == 1){
-                    myball.distroyball();}
+                    myball.distroyball();
 
+                    }
+                    ElfState = 0 ;
                     myball = null ;
                     didit = 1 ;
                 }

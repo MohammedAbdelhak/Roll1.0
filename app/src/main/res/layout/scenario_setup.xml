@@ -227,7 +227,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pour la fonction de lancement rapide\nRoll permet à l'utilisateur \nde personnaliser ses choix.\nSi l'utilisateur ne change pas les choix \n les choix par défaut seront activés\n(appareil photo / téléphone)."
+        android:text="Pour la fonction de lancement rapide\nRoll permet à l'utilisateur \nde personnaliser ses choix.\nSi l'utilisateur ne change pas les choix \n le mode par défaut sera activé\n (appareil photo / téléphone)."
         android:layout_below="@id/approw"
         android:layout_centerHorizontal="true"
         android:gravity="center"
