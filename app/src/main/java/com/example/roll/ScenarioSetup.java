@@ -41,6 +41,8 @@ public class ScenarioSetup extends AppCompatActivity {
                 case 3 :  right.setImageResource(R.drawable.play); break;
                 case 5 :  right.setImageResource(R.drawable.messenger); break;
                 case 6 :  right.setImageResource(R.drawable.notes); break;
+                case 7 :  right.setImageResource(R.drawable.camrollmini); break;
+
             }
             switch (Lvalue){
                 case 2 :  left.setImageResource(R.drawable.camera);    break;
@@ -49,6 +51,8 @@ public class ScenarioSetup extends AppCompatActivity {
                 case 3 :  left.setImageResource(R.drawable.play); break;
                 case 5 :  left.setImageResource(R.drawable.messenger); break;
                 case 6 :  left.setImageResource(R.drawable.notes); break;
+                case 7 :  left.setImageResource(R.drawable.camrollmini); break;
+
             }
 
         }
@@ -108,7 +112,7 @@ public class ScenarioSetup extends AppCompatActivity {
                         case R.id.musicplayapp :if(areaclicked == 1){ Rvalue = 3; if(Rvalue != Lvalue ){  right.setImageResource(R.drawable.play);areaclicked =0;}} else {  Lvalue = 3 ; if(Rvalue != Lvalue ){  left.setImageResource(R.drawable.play); areaclicked =0;}}  break;
                         case R.id.messagesapp : if(areaclicked == 1){ Rvalue = 5 ;  if(Rvalue != Lvalue ){  right.setImageResource(R.drawable.messenger);areaclicked =0;}} else {  Lvalue = 5 ; if(Rvalue != Lvalue ){  left.setImageResource(R.drawable.messenger);areaclicked =0;}}  break;
                         case R.id.notesapp : if(areaclicked == 1){ Rvalue = 6 ; if(Rvalue != Lvalue ){ right.setImageResource(R.drawable.notes);areaclicked =0;}} else {  Lvalue = 6 ;if(Rvalue != Lvalue ){  left.setImageResource(R.drawable.notes);areaclicked =0;}} break;
-
+                        case R.id.rollcam : if(areaclicked == 1){ Rvalue = 7 ; if(Rvalue != Lvalue ){ right.setImageResource(R.drawable.camrollmini);areaclicked =0;}} else {  Lvalue = 7 ;if(Rvalue != Lvalue ){  left.setImageResource(R.drawable.camrollmini);areaclicked =0;}} break;
 
 
                     }

@@ -114,6 +114,8 @@ public class FloatIt extends Service {
             case 4 : Right.setImageResource(com.example.roll.R.drawable.calendar);  break ;
             case 5 : Right.setImageResource(com.example.roll.R.drawable.messenger);  break ;
             case 6 : Right.setImageResource(com.example.roll.R.drawable.notes);  break;
+            case 7 : Right.setImageResource(com.example.roll.R.drawable.camrollmini);  break;
+
         }
 
         switch(L){
@@ -123,6 +125,8 @@ public class FloatIt extends Service {
             case 4 : Left.setImageResource(com.example.roll.R.drawable.calendar);  break ;
             case 5 : Left.setImageResource(com.example.roll.R.drawable.messenger);  break ;
             case 6 : Left.setImageResource(com.example.roll.R.drawable.notes);  break;
+            case 7 : Left.setImageResource(com.example.roll.R.drawable.camrollmini);  break;
+
         }
 
 

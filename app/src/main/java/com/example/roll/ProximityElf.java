@@ -140,7 +140,7 @@ public class ProximityElf extends Activity implements SensorEventListener {
 
                                 getpackage();
                                 Toast.makeText(cx , CurrentUserActivity , Toast.LENGTH_LONG).show();
-                                if(CurrentUserActivity.equals("com.sec.android.app.camera")){
+                                if(CurrentUserActivity.equals("com.sec.android.app.camera") ||CurrentUserActivity.equals("com.example.camroll") ){
                                     PackVerf = 1 ;
 
                                 }

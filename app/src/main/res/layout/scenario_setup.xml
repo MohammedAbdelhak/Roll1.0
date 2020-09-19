@@ -95,48 +95,56 @@
         >
         <ImageView
             android:id="@+id/phoneapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/phone"
             android:layout_weight="1"
             android:onClick="clicked"
             />
         <ImageView
+            android:id="@+id/rollcam"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/camrollmini"
+            android:layout_weight="1"
+            android:onClick="clicked"
+            />
+        <ImageView
             android:id="@+id/cameraapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/camera"
             android:layout_weight="1"
             android:onClick="clicked"
             />
         <ImageView
             android:id="@+id/musicplayapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/play"
             android:layout_weight="1"
             android:onClick="clicked"
             />
         <ImageView
             android:id="@+id/calendarapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/calendar"
             android:layout_weight="1"
             android:onClick="clicked"
             />
         <ImageView
             android:id="@+id/messagesapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/messenger"
             android:layout_weight="1"
             android:onClick="clicked"
             />
         <ImageView
             android:id="@+id/notesapp"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/notes"
             android:layout_weight="1"
             android:onClick="clicked"

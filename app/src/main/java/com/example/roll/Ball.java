@@ -225,6 +225,8 @@ public class Ball extends Activity {
             case 4 : Intent calendarint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.calendar"); c.startActivity(calendarint); break;
             case 5 : Intent msgint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.messaging"); c.startActivity(msgint); break;
             case 6 : Intent noteint = c.getPackageManager().getLaunchIntentForPackage("com.samsung.android.app.notes"); c.startActivity(noteint);break;
+            case 7 : Intent camrollint = c.getPackageManager().getLaunchIntentForPackage("com.example.camroll"); c.startActivity(camrollint);break;
+
         }
     }
 
